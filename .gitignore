@@ -26,3 +26,9 @@ hs_err_pid*
 # gradle
 build
 .gradle/
+
+# Exclude libs
+!lib
+!lib/*.jar
+!/gradle/wrapper/*
+/bin/
