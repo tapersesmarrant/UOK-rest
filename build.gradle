@@ -1,6 +1,4 @@
-
 apply plugin: 'java'
-apply plugin: 'maven'
 apply plugin: 'war'
 // see http://akhikhl.github.io/gretty-doc/Getting-started.html
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
@@ -41,5 +39,4 @@ gretty {
     port = 8080
     contextPath = ''
     logbackConfigFile = 'src/main/resources/logback.xml'
-
 }
