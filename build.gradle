@@ -1,0 +1,45 @@
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'war'
+// see http://akhikhl.github.io/gretty-doc/Getting-started.html
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+group = 'fr.iutinfo.2t'
+version = '1.0-SNAPSHOT'
+
+description = """jersey-skeleton"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    jcenter()
+}
+dependencies {
+    // Jersey
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.1'
+    compile 'org.glassfish.jersey.media:jersey-media-moxy:2.22.1'
+    compile 'org.glassfish.jersey.ext:jersey-mvc-jsp:2.22.1'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    // Logging
+    compile 'ch.qos.logback:logback-classic:1.1.2'
+    // BDD
+    compile 'org.jdbi:jdbi:2.56'
+    compile 'org.xerial:sqlite-jdbc:3.8.7'
+
+    // Guava for the win!
+    compile 'com.google.guava:guava:18.0'
+
+    // testing library
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-simple:2.22.1'
+}
+
+gretty {
+    port = 8080
+    contextPath = ''
+    logbackConfigFile = 'src/main/resources/logback.xml'
+
+}
