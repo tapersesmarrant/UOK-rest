@@ -16,11 +16,13 @@ public class UserDBResource {
 
 
     public UserDBResource() {
+        dao.dropUserTable();
         dao.createUserTable();
         if (dao.all().isEmpty()){
             //telNumber
             User dum = new User(0,"Margaret Thatcher", "la Dame de fer");
             dum.setTelNumber("060011223344");
+            dum.setEmail("a.b@c.fr");
             dao.insert(dum);
         }
 	}
