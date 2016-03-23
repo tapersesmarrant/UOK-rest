@@ -19,6 +19,8 @@ public class User implements Principal {
     private String password;
     private String passwdHash;
     private String salt;
+    private String telNumber;
+    private boolean isPro;
 
     private static User anonymous = new User(-1, "Anonymous", "anonym");
 
@@ -94,12 +96,12 @@ public class User implements Principal {
         if (getClass() != arg.getClass())
             return false;
         User user = (User) arg;
-        return name.equals(user.name) && alias.equals(user.alias) && email.equals(user.email) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt()));
+        return name.equals(user.name) && alias.equals(user.alias) && email.equals(user.email) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt())) && telNumber.equals(user.getTelNumber()) && isPro==(user.getIsPro());
     }
 
     @Override
     public String toString() {
-        return id + ": " + alias + ", " + name + " <" + email + ">";
+        return id + ": " + alias + ", " + name + " <" + email + ">"+" tel: "+telNumber+" is pro: "+isPro;
     }
 
     public String getAlias() {
@@ -144,5 +146,33 @@ public class User implements Principal {
 
     public static boolean isAnonymous(User currentUser) {
         return currentUser.getId() == getAnonymousUser().getId();
+    }
+
+    /**
+     * @return the telNumber
+     */
+    public String getTelNumber() {
+        return telNumber;
+    }
+
+    /**
+     * @param telNumber the telNumber to set
+     */
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
+    }
+
+    /**
+     * @return the isPro
+     */
+    public boolean getIsPro() {
+        return isPro;
+    }
+
+    /**
+     * @param isPro the isPro to set
+     */
+    public void setIsPro(boolean isPro) {
+        this.isPro = isPro;
     }
 }
