@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import org.junit.Assert;
+import fr.iutinfo.skeleton.res.User;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

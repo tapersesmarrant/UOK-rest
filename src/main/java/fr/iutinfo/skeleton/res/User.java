@@ -1,4 +1,4 @@
-package fr.iutinfo.skeleton.api;
+package fr.iutinfo.skeleton.res;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.MoreObjects;

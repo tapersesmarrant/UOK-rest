@@ -1,10 +1,9 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.auth.AuthFilter;
+import fr.iutinfo.skeleton.res.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

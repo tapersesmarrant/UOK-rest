@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.utils;
 
-import fr.iutinfo.skeleton.api.User;
+import fr.iutinfo.skeleton.res.User;
 
 import java.util.List;
 

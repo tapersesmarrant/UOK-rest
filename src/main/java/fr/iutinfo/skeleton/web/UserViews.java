@@ -2,7 +2,8 @@ package fr.iutinfo.skeleton.web;
 
 
 import fr.iutinfo.skeleton.api.BDDFactory;
-import fr.iutinfo.skeleton.api.*;
+import fr.iutinfo.skeleton.res.User;
+import fr.iutinfo.skeleton.res.UserDao;
 import org.glassfish.jersey.server.mvc.Template;
 
 import javax.ws.rs.*;

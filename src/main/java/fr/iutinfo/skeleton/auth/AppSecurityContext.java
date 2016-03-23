@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.auth;
 
-import fr.iutinfo.skeleton.api.User;
+import fr.iutinfo.skeleton.res.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

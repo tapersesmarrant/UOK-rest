@@ -1,4 +1,4 @@
-package fr.iutinfo.skeleton.api;
+package fr.iutinfo.skeleton.res;
 
 import fr.iutinfo.skeleton.utils.binders.BindUser;
 import org.skife.jdbi.v2.sqlobject.*;
