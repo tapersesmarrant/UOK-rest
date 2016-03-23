@@ -24,7 +24,8 @@ public class User implements Principal {
     private String telNumber;
     private boolean isPro;
     private String location;
-    private boolean isAcceptingGlobal=true;
+    private boolean isAcceptingGlobal =true;
+
 
     private static User anonymous = new User(-1, "Anonymous", "anonym");
 
@@ -194,18 +195,13 @@ public class User implements Principal {
         this.telNumber = telNumber;
     }
 
-    /**
-     * @return the isPro
-     */
-    public boolean getIsPro() {
+
+    public boolean isPro() {
         return isPro;
     }
 
-    /**
-     * @param isPro the isPro to set
-     */
-    public void setIsPro(boolean isPro) {
-        this.isPro = isPro;
+    public void setPro(boolean pro) {
+        isPro = pro;
     }
 
     public boolean isAcceptingGlobal() {
@@ -213,7 +209,7 @@ public class User implements Principal {
     }
 
     public void setAcceptingGlobal(boolean acceptingGlobal) {
-        isAcceptingGlobal = acceptingGlobal;
+        this.isAcceptingGlobal = acceptingGlobal;
     }
 
     public String getLocation() {

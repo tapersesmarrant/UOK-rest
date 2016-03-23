@@ -4,6 +4,7 @@ import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
+import javax.ws.rs.BeanParam;
 import java.util.List;
 
 public interface UserDao {
@@ -17,12 +18,12 @@ public interface UserDao {
             "telNumber varchar(32), " +
             "isPro BOOLEAN, " +
             "location VARCHAR(32)," +
-            "isAcceptingGlobal BOOLEAN )")
+            "global BOOLEAN )")
 	void createUserTable();
 
-	@SqlUpdate("insert into users (name,alias ,email,isPro, telNumber, passwdHash, salt, location, isAcceptingGlobal) values (:name, :alias, :email, :isPro, :telNumber, :passwdHash, :salt, :location, :isAcceptingGlobal)")
+	@SqlUpdate("insert into users (name,alias ,email,isPro, telNumber, passwdHash, salt, location, global) values (:name, :alias, :email, :isPro, :telNumber, :hash, :salt, :location, :isAcceptingGlobal)")
 	@GetGeneratedKeys
-	int insert(@BindBean() User user);
+	int insert(@BindUser() User user);
 
 
 	@SqlQuery("select * from users where name = :name")
