@@ -1,10 +1,10 @@
 package fr.iutinfo.skeleton.api;
 
+import fr.iutinfo.skeleton.utils.binders.BindUser;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
-import javax.ws.rs.BeanParam;
 import java.util.List;
 
 public interface UserDao {

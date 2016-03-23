@@ -1,5 +1,6 @@
-package fr.iutinfo.skeleton.api;
+package fr.iutinfo.skeleton.utils.binders;
 
+import fr.iutinfo.skeleton.api.User;
 import org.skife.jdbi.v2.SQLStatement;
 import org.skife.jdbi.v2.sqlobject.Binder;
 import org.skife.jdbi.v2.sqlobject.BinderFactory;
