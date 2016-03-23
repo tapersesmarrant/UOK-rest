@@ -18,7 +18,10 @@ public class UserDBResource {
     public UserDBResource() {
         dao.createUserTable();
         if (dao.all().isEmpty()){
-            dao.insert(new User(0,"Margaret Thatcher", "la Dame de fer"));
+            //telNumber
+            User dum = new User(0,"Margaret Thatcher", "la Dame de fer");
+            dum.setTelNumber("060011223344");
+            dao.insert(dum);
         }
 	}
 	
