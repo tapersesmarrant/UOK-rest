@@ -27,6 +27,7 @@ Créer ensuite un dossier ".gradle" dans votre répertoire personnel. Il contien
 ```
 mkdir $HOME/.gradle
 touch $HOME/.gradle/gradle.properties
+export GRADLE_USER_HOME="/tmp/$USER/.grad"
 ```
 
 **/!\ Si vous êtes pas sur les ordinateurs de l'IUT, ou sur le réseau WIFI de Lille1 faire la chose suivante : !**
@@ -36,9 +37,13 @@ Modifier ce fichier gradle.properties avec votre éditeur préféré (Emacs / vi
 ```
 systemProp.http.proxyHost=cache.univ-lille1.fr
 systemProp.http.proxyPort=3128
+gradle.user.home="/tmp/VOTRE-LOGIN/.grad"
 ```
 
-**/!\ Si vous n'êtes pas sur les ordinateurs de l'IUT, ou sur le réseau WIFI de Lille1, passer le paramètre proxy.active à "false" !**
+Puis faites aussi la commande suivante : 
+
+    export GRADLE_USER_HOME
+
 
 #### Windows
 - Vérifiez que la variable `JAVA_HOME` existe et qu'elle pointe bien vers le java JDK installé sur votre ordinateur. Si elle n'existe pas, créez la.
