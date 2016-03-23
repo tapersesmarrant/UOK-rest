@@ -11,17 +11,15 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserDBResource {
-	private static UserDao dao = BDDFactory.getDbi().open(UserDao.class);
+	private static UserDao dao = BDDFactory.getDbi().onDemand(UserDao.class);
     final static Logger logger = LoggerFactory.getLogger(UserDBResource.class);
 
 
     public UserDBResource() {
-		try {
-			dao.createUserTable();
-			dao.insert(new User(0,"Margaret Thatcher", "la Dame de fer"));
-		} catch (Exception e) {
-			System.out.println("Table déjà là !");
-		}
+        dao.createUserTable();
+        if (dao.all().isEmpty()){
+            dao.insert(new User(0,"Margaret Thatcher", "la Dame de fer"));
+        }
 	}
 	
 	@POST

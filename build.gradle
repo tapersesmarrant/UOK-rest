@@ -27,6 +27,9 @@ dependencies {
     compile 'org.jdbi:jdbi:2.56'
     compile 'org.xerial:sqlite-jdbc:3.8.7'
 
+    // H2 DB
+    compile 'com.h2database:h2:1.4.191'
+
     // Guava for the win!
     compile 'com.google.guava:guava:18.0'
 
