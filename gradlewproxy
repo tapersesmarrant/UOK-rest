@@ -1,0 +1,2 @@
+#!/bin/sh
+./gradlew -Dhttp.proxyHost=cache.univ-lille1.fr -Dhttp.proxyPort=3128 -Dhttps.proxyHost=cache.univ-lille1.fr -Dhttps.proxyPort=3128 --gradle-user-home "/tmp/$USER/.grad" $*
