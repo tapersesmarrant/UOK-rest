@@ -18,7 +18,7 @@ public class UserDBResource {
 
 
     public UserDBResource() {
-        dao.dropUserTable();
+        //dao.dropUserTable();
         dao.createUserTable();
         if (dao.all().isEmpty()){
             //telNumber
