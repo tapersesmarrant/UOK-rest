@@ -1,6 +1,8 @@
 package fr.iutinfo.skeleton.api;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import org.slf4j.Logger;
@@ -21,6 +23,8 @@ public class User implements Principal {
     private String salt;
     private String telNumber;
     private boolean isPro;
+    private String location;
+    private boolean isAcceptingGlobal=true;
 
     private static User anonymous = new User(-1, "Anonymous", "anonym");
 
@@ -92,16 +96,44 @@ public class User implements Principal {
     }
 
     @Override
-    public boolean equals(Object arg) {
-        if (getClass() != arg.getClass())
-            return false;
-        User user = (User) arg;
-        return name.equals(user.name) && alias.equals(user.alias) && email.equals(user.email) && passwdHash.equals(user.getPasswdHash()) && salt.equals((user.getSalt())) && telNumber.equals(user.getTelNumber()) && isPro==(user.getIsPro());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                isPro == user.isPro &&
+                isAcceptingGlobal == user.isAcceptingGlobal &&
+                Objects.equal(name, user.name) &&
+                Objects.equal(alias, user.alias) &&
+                Objects.equal(email, user.email) &&
+                Objects.equal(password, user.password) &&
+                Objects.equal(passwdHash, user.passwdHash) &&
+                Objects.equal(salt, user.salt) &&
+                Objects.equal(telNumber, user.telNumber) &&
+                Objects.equal(location, user.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name, alias, id, email, password, passwdHash, salt, telNumber, isPro, location, isAcceptingGlobal);
     }
 
     @Override
     public String toString() {
-        return id + ": " + alias + ", " + name + " <" + email + ">"+" tel: "+telNumber+" is pro: "+isPro;
+        return MoreObjects.toStringHelper(this)
+                .add("name", name)
+                .add("alias", alias)
+                .add("id", id)
+                .add("email", email)
+                .add("password", password)
+                .add("passwdHash", passwdHash)
+                .add("salt", salt)
+                .add("telNumber", telNumber)
+                .add("isPro", isPro)
+                .add("location", location)
+                .add("isAcceptingGlobal", isAcceptingGlobal)
+                .omitNullValues()
+                .toString();
     }
 
     public String getAlias() {
@@ -174,5 +206,21 @@ public class User implements Principal {
      */
     public void setIsPro(boolean isPro) {
         this.isPro = isPro;
+    }
+
+    public boolean isAcceptingGlobal() {
+        return isAcceptingGlobal;
+    }
+
+    public void setAcceptingGlobal(boolean acceptingGlobal) {
+        isAcceptingGlobal = acceptingGlobal;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
