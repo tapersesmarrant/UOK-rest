@@ -1,4 +1,4 @@
-package fr.iutinfo.skeleton.res;
+package fr.iutinfo.skeleton.res.dao;
 
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 

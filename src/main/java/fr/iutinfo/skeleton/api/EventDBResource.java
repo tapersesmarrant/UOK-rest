@@ -1,15 +1,12 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.Event;
-import fr.iutinfo.skeleton.res.EventDao;
-import fr.iutinfo.skeleton.res.User;
-import fr.iutinfo.skeleton.res.UserDao;
+import fr.iutinfo.skeleton.res.model.Event;
+import fr.iutinfo.skeleton.res.dao.EventDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/eventdb")

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package fr.iutinfo.skeleton.res;
+package fr.iutinfo.skeleton.res.model;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

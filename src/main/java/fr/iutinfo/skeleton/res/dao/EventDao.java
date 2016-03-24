@@ -1,7 +1,7 @@
-package fr.iutinfo.skeleton.res;
+package fr.iutinfo.skeleton.res.dao;
 
+import fr.iutinfo.skeleton.res.model.Event;
 import fr.iutinfo.skeleton.utils.binders.BindEvent;
-import fr.iutinfo.skeleton.utils.binders.BindUser;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;

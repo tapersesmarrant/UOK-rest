@@ -1,9 +1,8 @@
-package fr.iutinfo.skeleton.res;
+package fr.iutinfo.skeleton.res.model;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Strings;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import fr.iutinfo.skeleton.utils.StrUtils;

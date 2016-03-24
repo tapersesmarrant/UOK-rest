@@ -1,5 +1,6 @@
-package fr.iutinfo.skeleton.res;
+package fr.iutinfo.skeleton.res.dao;
 
+import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.utils.binders.BindUser;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;

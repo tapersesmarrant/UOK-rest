@@ -1,9 +1,9 @@
 package utils;
 
 import fr.iutinfo.skeleton.api.BDDFactory;
-import fr.iutinfo.skeleton.res.User;
+import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.api.UserDBResource;
-import fr.iutinfo.skeleton.res.UserDao;
+import fr.iutinfo.skeleton.res.dao.UserDao;
 import fr.iutinfo.skeleton.utils.RestClient;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;

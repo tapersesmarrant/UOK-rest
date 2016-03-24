@@ -1,8 +1,8 @@
 package fr.iutinfo.skeleton.api;
 
 
-import fr.iutinfo.skeleton.res.StatDao;
-import fr.iutinfo.skeleton.res.Stats;
+import fr.iutinfo.skeleton.res.dao.StatDao;
+import fr.iutinfo.skeleton.res.model.Stats;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

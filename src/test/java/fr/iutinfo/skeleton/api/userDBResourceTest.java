@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.User;
+import fr.iutinfo.skeleton.res.model.User;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Before;
 import org.junit.Ignore;

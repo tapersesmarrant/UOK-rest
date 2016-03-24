@@ -1,9 +1,9 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.Event;
-import fr.iutinfo.skeleton.res.EventDao;
-import fr.iutinfo.skeleton.res.User;
-import fr.iutinfo.skeleton.res.UserDao;
+import fr.iutinfo.skeleton.res.model.Event;
+import fr.iutinfo.skeleton.res.dao.EventDao;
+import fr.iutinfo.skeleton.res.model.User;
+import fr.iutinfo.skeleton.res.dao.UserDao;
 import org.skife.jdbi.v2.DBI;
 import org.h2.jdbcx.JdbcDataSource;
 
