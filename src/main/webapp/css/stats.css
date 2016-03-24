@@ -1,0 +1,16 @@
+body{
+	/*
+	background-color: #F0F0FF
+	*/
+	background-color: #F0F8FF
+}
+
+.center-block {
+	font-size: 100px;
+	    margin: auto;
+}
+
+h1 {
+	font-family: "Helvetica Neue", sans-serif;
+	color: #648BAF;
+}
