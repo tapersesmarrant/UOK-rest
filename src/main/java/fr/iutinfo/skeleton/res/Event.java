@@ -9,11 +9,11 @@ package fr.iutinfo.skeleton.res;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
- * @author ouvryl
+ * @author ouvryl beaussart
  */
 public class Event {
 
@@ -31,6 +31,8 @@ public class Event {
     private boolean isDone =false;
     private boolean isCanceled =false;
     private String desciption;
+
+    public Event(){}
     
     public Event(int id, int onwer, Date date, String description){
         this.id=id;

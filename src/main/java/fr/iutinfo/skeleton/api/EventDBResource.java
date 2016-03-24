@@ -1,5 +1,7 @@
 package fr.iutinfo.skeleton.api;
 
+import fr.iutinfo.skeleton.res.Event;
+import fr.iutinfo.skeleton.res.EventDao;
 import fr.iutinfo.skeleton.res.User;
 import fr.iutinfo.skeleton.res.UserDao;
 import org.slf4j.Logger;
@@ -10,93 +12,43 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/userdb")
+@Path("/eventdb")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EventDBResource {
-	private static UserDao dao = BDDFactory.getDbi().onDemand(UserDao.class);
+	private static EventDao dao = BDDFactory.getDbi().onDemand(EventDao.class);
     final static Logger logger = LoggerFactory.getLogger(EventDBResource.class);
 
 
     public EventDBResource() {
-        //dao.dropUserTable();
-        dao.createUserTable();
-        if (dao.all().isEmpty()){
-            //telNumber
-            User dum = new User(0,"Margaret Thatcher", "la Dame de fer");
-            dum.setTelNumber("060011223344");
-            dum.setEmail("a.b@c.fr");
-            dao.insert(dum);
-        }
 	}
 	
 	@POST
-	public User createUser(User user) {
-        user.resetPasswordHash();
+	public Event createUser(Event user) {
         int id = dao.insert(user);
         user.setId(id);
 		return user;
 	}
 
-	@GET
-	@Path("/byEmail/{email}")
-	public User getUser(@PathParam("email") String email) {
-		User user = dao.findByEmail(email);
-		if (user == null) {
-			throw new WebApplicationException(404);
-		}
-		return user;
-	}
-
-	@GET
-	@Path("/byNum/{number}")
-	public User getUserByNumber(@PathParam("number") String number) {
-		User user = dao.findByNumber(number);
-		if (user == null) {
-			throw new WebApplicationException(404);
-		}
-		return user;
-	}
 
     @GET
     @Path("/{id}")
-    public User getUserById(@PathParam("id") int id){
-        User user = dao.findById(id);
-        if (user == null) {
+    public Event getUserById(@PathParam("id") int id){
+        Event event = dao.findById(id);
+        if (event == null) {
             throw new WebApplicationException(404);
         }
-        return user;
+        return event;
     }
 
-
-    @PUT
-    @Path("/{id}")
-    public Response updateUser(@PathParam("id") int id,
-                               User user) {
-        User oldUser = dao.findById(id);
-        logger.info("Should update user with id: " + id + " (" + oldUser + ") to " + user);
-        if (user == null) {
-            throw new WebApplicationException(404);
-        }
-        oldUser.updateFrom(user);
-        dao.updateUser(oldUser);
-
-        return Response.status(200).entity(oldUser).build();
-    }
-
-    @DELETE
-    @Path("/{id}")
-    public Response deleteUser(@PathParam("id") int id) {
-        User user = dao.findById(id);
-        if (user == null) {
-            throw new WebApplicationException(404);
-        }
-        dao.deleteUser(id);
-        return Response.status(200).entity(user).build();
+    @GET
+    @Path("/owner/{id}")
+    public List<Event> getUserByOwner(@PathParam("id") int id){
+        return dao.all(id);
     }
 
 	@GET
-	public List<User> getAllUsers() {
+	public List<Event> getAllUsers() {
 		return dao.all();
 	}
 
