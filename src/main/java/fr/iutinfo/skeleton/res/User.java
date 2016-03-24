@@ -3,8 +3,10 @@ package fr.iutinfo.skeleton.res;
 import com.google.common.base.Charsets;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
+import fr.iutinfo.skeleton.utils.StrUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +43,47 @@ public class User implements Principal {
     }
 
     public User() {
+    }
+
+    public void updateFrom(User user){
+        logger.info("Lokking for change of this user (id {}) from {}",id,user);
+
+        if (StrUtils.newValue(name,user.name)){
+            logger.info("Editing of name from {} to {}",name,user.name);
+            setName(user.name);
+        }
+        if (StrUtils.newValue(alias, user.alias)) {
+            logger.info("Editing of alias from {} to {}", alias, user.alias);
+            setAlias(user.alias);
+        }
+        if (StrUtils.newValue(email, user.email)) {
+            logger.info("Editing of email from {} to {}", email, user.email);
+            setEmail(user.email);
+        }
+        if (StrUtils.newValue(telNumber,user.telNumber)){
+            logger.info("Editing of telNumber from {} to {}",telNumber,user.telNumber);
+            setTelNumber(user.telNumber);
+        }
+        if (StrUtils.newValue(location,user.location)){
+            logger.info("Editing of location from {} to {}",location,user.location);
+            setTelNumber(user.location);
+        }
+        if (user.password != null){
+            logger.info("Editing of password to {}",user.password);
+            setPassword(user.password);
+        }
+        if (isPro != user.isPro){
+            logger.info("Editing of isPro from {} to {}",isPro,user.isPro);
+            setPro(user.isPro);
+        }
+        if (isAcceptingGlobal != user.isAcceptingGlobal){
+            logger.info("Editing of isAcceptingGlobal from {} to {}",isAcceptingGlobal,user.isAcceptingGlobal);
+            setAcceptingGlobal(user.isAcceptingGlobal);
+        }
+
+        logger.info("Edditing is done for id {}",id);
+
+
     }
 
     public String getEmail() {

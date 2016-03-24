@@ -25,6 +25,13 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insert(@BindUser() User user);
 
+	@SqlUpdate("UPDATE users SET name=:name ,alias=:alias ,email=:email,isPro=:isPro, telNumber=:telNumber, passwdHash=:hash, salt=:salt, location=:location, global=:isAcceptingGlobal WHERE id=:id")
+	@GetGeneratedKeys
+	int updateUser(@BindUser() User user);
+
+    @SqlUpdate  ("DELETE from users where id= :id")
+    void deleteUser(@Bind("id") int id);
+
 
 	@SqlQuery("select * from users where name = :name")
     @RegisterMapperFactory(BeanMapperFactory.class)
@@ -40,6 +47,16 @@ public interface UserDao {
 	@SqlQuery("select * from users where id = :id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	User findById(@Bind("id") int id);
+
+
+	@SqlQuery("select * from users where email = :email")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	User findByEmail(@Bind("email") String  email);
+
+
+	@SqlQuery("select * from users where telNumber = :telNumber")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	User findByNumber(@Bind("telNumber") String telNumber);
 
 	void close();
 }
