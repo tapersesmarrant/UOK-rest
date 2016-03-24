@@ -1,3 +1,7 @@
+plugins {
+    id "com.webcohesion.enunciate" version "2.3.0"
+}
+
 apply plugin: 'java'
 apply plugin: 'war'
 // see http://akhikhl.github.io/gretty-doc/Getting-started.html
@@ -33,6 +37,8 @@ dependencies {
     // Guava for the win!
     compile 'com.google.guava:guava:18.0'
 
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
+
     // testing library
     testCompile 'junit:junit:4.12'
     testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-simple:2.22.1'
@@ -42,4 +48,13 @@ gretty {
     port = 8080
     contextPath = ''
     logbackConfigFile = 'src/main/resources/logback.xml'
+}
+
+tasks.enunciate {
+    File enunciateDistDir = file("src/main/webapp/docs")
+    doFirst {
+        enunciateDistDir.deleteDir()
+        enunciateDistDir.mkdirs()
+    }
+    export("docs", enunciateDistDir)
 }

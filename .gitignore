@@ -62,3 +62,8 @@ hs_err_pid*
 !lib/*.jar
 !/gradle/wrapper/*
 /bin/
+
+### enuniciate
+/src/main/enunciate/out
+/src/main/enunciate/v1
+/src/main/webapp/docs

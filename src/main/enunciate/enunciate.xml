@@ -1,0 +1,42 @@
+<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/stoicflame/enunciate/master/top/src/main/resources/META-INF/enunciate-1.28.xsd"
+           label="Alis Documentation">
+    <api-import pattern="fr.iutinfo.skeleton.api.**" />
+    <api-import pattern="fr.iutinfo.skeleton.api.**" />
+
+    <services>
+        <rest defaultRestSubcontext="/v1/">
+        </rest>
+    </services>
+    <webapp disabled="true"></webapp>
+
+    <!-- <api-classes> -->
+    <!-- <include/> -->
+    <!-- <exclude/> -->
+    <!-- </api-classes> -->
+    <modules>
+        <disable-rule id="csharp.warnings"/>
+        <disable-rule id="c-warnings"/>
+        <disable-rule id="obj-c.warnings"/>
+        <basic-app disabled="true"/>
+        <c disabled="true"/>
+        <csharp disabled="true"/>
+        <jaxws-ri disabled="true"/>
+        <obj-c disabled="true"/>
+        <amf disabled="true"/>
+        <gwt disabled="true"/>
+        <jboss disabled="true"/>
+        <object-c disabled="true"/>
+        <rubby disabled="true"/>
+        <jaxws-client disabled="true"/>
+        <swagger disabled="false"/>
+
+        <!-- to add every time :
+  "basePath" : "/v1",
+        -->
+
+        <jersey disabled="false" applicationClass="fr.iutinfo.skeleton.api.Api" defaultNamespace="/v1/"/>
+
+        <docs title="ICMD API"  docsDir="./v1" includeDefaultDownloads="true" includeExampleXml="false" disableRestMountpoint="true" copyright="copyright" forceExampleJson="true"/>
+    </modules>
+</enunciate>
