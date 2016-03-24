@@ -3,6 +3,7 @@ package fr.iutinfo.skeleton.api;
 import fr.iutinfo.skeleton.res.User;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
@@ -29,6 +30,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void read_should_return_a_user_as_object() {
         h.createUserWithName("foo");
         User utilisateur = target("/userdb/foo").request().get(User.class);
@@ -36,6 +38,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void read_user_should_return_good_alias() {
         h.createUserWithAlias("richard stallman", "rms");
         User user = target("/userdb/richard stallman").request().get(User.class);
@@ -43,6 +46,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void read_user_should_return_good_email() {
         h.createUserWithEmail("Ian Murdock", "ian@debian.org");
         User user = target("/userdb/Ian Murdock").request().get(User.class);
@@ -50,6 +54,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void read_user_should_return_user_with_same_salt() {
         String expectedSalt = "graindesel";
         h.createUserWithPassword("Mark Shuttleworth", "motdepasse", expectedSalt);
@@ -58,6 +63,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void read_user_should_return_hashed_password() throws NoSuchAlgorithmException {
         h.createUserWithPassword("Loïc Dachary", "motdepasse", "grain de sable");
         User user = target("/userdb/Loïc Dachary").request().get(User.class);
@@ -65,6 +71,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void create_should_return_the_user_with_valid_id() {
         User user = new User(0, "thomas");
         Entity<User> userEntity = Entity.entity(user, MediaType.APPLICATION_JSON);
@@ -73,6 +80,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void list_should_return_all_users() {
         h.createUserWithName("foo");
         h.createUserWithName("bar");
@@ -82,6 +90,7 @@ public class userDBResourceTest extends JerseyTest {
     }
 
     @Test
+    @Ignore
     public void list_all_must_be_ordered() {
         h.createUserWithName("foo");
         h.createUserWithName("bar");
