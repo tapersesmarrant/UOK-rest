@@ -9,9 +9,11 @@ import fr.iutinfo.skeleton.api.BDDFactory;
  */
 public class Stats {
     private int nmbUsers;
+    private int nmbEvents;
 
     public Stats(StatDao dao){
         nmbUsers = dao.getNmbUsers();
+        nmbEvents = dao.getNmbEvents();
     }
 
     public Stats(){
@@ -24,6 +26,14 @@ public class Stats {
 
     public void setNmbUsers(int nmbUsers) {
         this.nmbUsers = nmbUsers;
+    }
+
+    public int getNmbEvents() {
+        return nmbEvents;
+    }
+
+    public void setNmbEvents(int nmbEvents) {
+        this.nmbEvents = nmbEvents;
     }
 
     @Override

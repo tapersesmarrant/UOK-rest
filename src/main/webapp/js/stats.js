@@ -9,7 +9,7 @@ function getStats() {
 			afficheEvents(data);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('getStat error: ' + textStatus);
+			console.log('getStat error: ' + textStatus);
 		}
 	});
 }
@@ -22,5 +22,6 @@ function afficheUser(data) {
 
 function afficheEvents(data) {
 	console.log(data);
-	$("#odoEvent").html(Math.floor(Math.random()*2));
+	//$("#odoEvent").html(Math.floor(Math.random()*2));
+	$("#odoEvent").html(data.nmbEvents);
 }

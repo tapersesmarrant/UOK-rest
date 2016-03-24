@@ -9,4 +9,6 @@ public interface StatDao {
 
     @SqlQuery("SELECT COUNT(*) FROM users")
     int getNmbUsers();
+    @SqlQuery("SELECT COUNT(*) FROM event")
+    int getNmbEvents();
 }
