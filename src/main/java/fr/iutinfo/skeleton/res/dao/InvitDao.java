@@ -1,6 +1,8 @@
 package fr.iutinfo.skeleton.res.dao;
 
+import fr.iutinfo.skeleton.res.model.Event;
 import fr.iutinfo.skeleton.res.model.User;
+import fr.iutinfo.skeleton.utils.binders.BindEvent;
 import fr.iutinfo.skeleton.utils.binders.BindUser;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
@@ -21,11 +23,13 @@ public interface InvitDao {
             "user INTEGER, " +
             "timestamp date, " +
             "isSecondaryList  boolean, " +
-            "isFired boolean)" );
+            "isFired boolean)" )
     void createUserTable();
 
-    @SqlUpdate("insert into invit (envent, user,timestamp ,isSecondaryList,isFired")+
-            "values (:owner, :location,:date,:name,:limitTime,:isLock,:isRush,:isTime,:timeBeforeRush,:cost,:isDone,:isCanceled)")
+    @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired)"+
+            "values (:event, :user,:timestamp,:isSecondaryList,:isfired)")
+    @GetGeneratedKeys
+    int insert(@BindEvent() Event event);
 
 
 
