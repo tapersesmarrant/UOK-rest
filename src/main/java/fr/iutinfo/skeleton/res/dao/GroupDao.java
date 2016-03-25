@@ -1,6 +1,7 @@
 package fr.iutinfo.skeleton.res.dao;
 
 import fr.iutinfo.skeleton.res.model.Event;
+import fr.iutinfo.skeleton.res.model.Group;
 import fr.iutinfo.skeleton.res.model.Invit;
 import fr.iutinfo.skeleton.utils.binders.BindEvent;
 import org.skife.jdbi.v2.sqlobject.Bind;
@@ -38,5 +39,5 @@ public interface GroupDao {
 
     @SqlQuery("select * from group where id = :id")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Group  findByid(@Bind("id") int id);
+    Group findByid(@Bind("id") int id);
 }
