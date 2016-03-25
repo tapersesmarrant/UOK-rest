@@ -38,7 +38,8 @@ function getByAnnotation() {
         afficheUser(data)
        },
        error : function(jqXHR, textStatus, errorThrown) {
-       			alert('error: ' + textStatus);
+       			//alert('error: ' + textStatus);
+		   afficheError("Return code : " + jqXHR.status);
        		}
      });
      } else {
@@ -72,7 +73,8 @@ function postUserGeneric(name, alias, pwd, url) {
 			afficheUser(data);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('postUser error: ' + textStatus);
+			//alert('postUser error: ' + textStatus);
+			afficheError("Return code : " + jqXHR.status);
 		}
 	});
 }
@@ -94,6 +96,14 @@ function listUsersGeneric(url) {
 function afficheUser(data) {
 	console.log(data);
 	$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
+}
+
+function afficheError(data) {
+	console.log(data);
+	$("#reponse").html("<div class=\"alert alert-danger material_alert material_alert_danger\" role=\"alert\">"+
+		data+
+	"<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button></div>");
+
 }
 
 function afficheListUsers(data) {

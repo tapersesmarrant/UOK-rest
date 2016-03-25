@@ -14,3 +14,10 @@ h1 {
 	font-family: "Helvetica Neue", sans-serif;
 	color: #648BAF;
 }
+
+.backgroundBlock{
+	/*
+	background-color: #6fa5d2;
+	*/
+	text-align: center;
+}

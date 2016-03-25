@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand material_navbar_brand" href="#">UOK</a>
+            <a class="navbar-brand material_navbar_brand" href="index.html">UOK</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
@@ -51,20 +51,24 @@
     </div>
 </nav>
 
-<div style="text-align: center;">
-<h1>Nombre d'utilisateur dans la base <br><br><br></h1>
+<div class="backgroundBlock">
+    <div >
+        <h1>Nombre d'utilisateur dans la base <br><br><br></h1>
 
-<div class="center-block" >
-    <div class="odometer" id="odoUsers" ></div>
-</div>
-<br><br><br>
-<h1>Nombre d'evenemnets dans la base <br><br><br></h1>
+        <div class="center-block" >
+            <div class="odometer" id="odoUsers" ></div>
+        </div>
+        <br><br><br>
+        <h1>Nombre d'evenemnets dans la base <br><br><br></h1>
 
-<div class="center-block" >
-    <div class="odometer" id="odoEvent" ></div>
-</div>
+        <div class="center-block" >
+            <div class="odometer" id="odoEvent" ></div>
+        </div>
 
-</div>
+    </div>
+
+
+
     <script type="text/javascript">
             $(document).ready(function() {
                 setInterval(function(){ 
@@ -74,6 +78,9 @@
             });
 
     </script>
-
+    <style type="text/css">
+        body { background: #F0F8FF !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    </style>
+</div>
 </body>
 </html>
