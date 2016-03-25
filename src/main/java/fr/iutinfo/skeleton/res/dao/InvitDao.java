@@ -40,6 +40,10 @@ public interface InvitDao {
     @SqlUpdate("drop table if exists invit")
     void dropUserTable();
 
+    @SqlQuery("select * from invit where event = :event")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    Invit  findByEvent(@Bind("event") Event  event);
+
 
 
 
