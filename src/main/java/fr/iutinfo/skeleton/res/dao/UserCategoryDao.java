@@ -29,7 +29,7 @@ public interface UserCategoryDao {
     @GetGeneratedKeys
     int insert(@BindEvent() UserCategory userCategory);
 
-    @SqlUpdate  ("DELETE from group where id=:id")
+    @SqlUpdate  ("DELETE from userCategory where id=:id")
     void deleteInvit(@Bind("id") int id);
 
 
