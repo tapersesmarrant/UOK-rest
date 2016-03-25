@@ -48,6 +48,7 @@ gretty {
     port = 8080
     contextPath = ''
     logbackConfigFile = 'src/main/resources/logback.xml'
+    scanInterval = 10
 }
 
 tasks.enunciate {
