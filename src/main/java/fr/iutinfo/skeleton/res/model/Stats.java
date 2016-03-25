@@ -54,7 +54,7 @@ public class Stats {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("nmbUsers", nmbUsers)
+                .add("nmbEvents", nmbEvents)
                 .toString();
     }
-
 }
