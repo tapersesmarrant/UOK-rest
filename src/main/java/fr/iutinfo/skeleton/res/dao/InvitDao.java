@@ -42,7 +42,7 @@ public interface InvitDao {
 
     @SqlQuery("select * from invit where event = :event")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Invit  findByEvent(@Bind("event") Event  event);
+    Invit  findByEvent(@Bind("event") Event  event, User user);
 
 
 
