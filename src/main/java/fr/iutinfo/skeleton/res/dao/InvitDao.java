@@ -1,6 +1,7 @@
 package fr.iutinfo.skeleton.res.dao;
 
 import fr.iutinfo.skeleton.res.model.Event;
+import fr.iutinfo.skeleton.res.model.Invit;
 import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.utils.binders.BindEvent;
 import fr.iutinfo.skeleton.utils.binders.BindUser;
@@ -18,18 +19,31 @@ import java.util.List;
  */
 public interface InvitDao {
     @SqlUpdate("create table IF NOT EXISTS invit (" +
-            "id integer primary key auto_increment, " +
-            "envent INTEGER,"+
+
+            "event INTEGER,"+
             "user INTEGER, " +
             "timestamp date, " +
             "isSecondaryList  boolean, " +
-            "isFired boolean)" )
+            "isFired boolean, " +
+            "CONSTRAINT pk_invit PRIMARY KEY (user,event)" )
     void createUserTable();
 
     @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired)"+
             "values (:event, :user,:timestamp,:isSecondaryList,:isfired)")
     @GetGeneratedKeys
-    int insert(@BindEvent() Event event);
+    int insert(@BindEvent() Invit invit);
+
+    @SqlUpdate  ("DELETE from invit where event=:event AND user:=user")
+    void deleteInvit(@Bind("id") int id);
+
+
+    @SqlUpdate("drop table if exists invit")
+    void dropUserTable();
+
+
+
+
+
 
 
 
