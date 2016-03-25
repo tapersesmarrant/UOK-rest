@@ -31,7 +31,7 @@ public interface GroupDao {
     @SqlUpdate("insert into group (owner, name,fixedCategory ,categoryUser)"+
             "values (:owner, :name,:fixedCategory,:categoryUser)")
     @GetGeneratedKeys
-    int insert(@BindEvent() Invit invit);
+    int insert(@BindEvent() Group group);
 
     @SqlUpdate  ("DELETE from group where id=:id")
     void deleteInvit(@Bind("id") int id);
