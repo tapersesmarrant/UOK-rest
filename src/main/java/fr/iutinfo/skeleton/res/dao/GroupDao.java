@@ -21,14 +21,17 @@ public interface GroupDao {
             "owner INTEGER, " +
             "name VARCHAR(100), " +
             "fixedCategory  INTEGER , " +
-            "isFirecategoryUser INTEGER, " +
-            "CONSTRAINT pk_group PRIMARY KEY (id)" )
+            "categoryUser INTEGER, " +
+            "CONSTRAINT pk_group PRIMARY KEY (id),"+
+            "CONSTRAINT fk_categoryUser FOREIGN KEY categoryUser REFERENCES  userCategory(id)"+
+            "CONSTRAINT fk_fixedCategory FOREIGN KEY fixedCategory REFERENCES fixedCategory(id))"+
+            "CONSTRAINT fk_owner FOREIGN KEY owner REFERENCES users(id)")
     void createUserTable();
 
     @SqlUpdate("insert into group (owner, name,fixedCategory ,categoryUser)"+
             "values (:owner, :name,:fixedCategory,:categoryUser)")
     @GetGeneratedKeys
-    int insert(@BindEvent() Invit invit);
+    int insert(@BindEvent() Group group);
 
     @SqlUpdate  ("DELETE from group where id=:id")
     void deleteInvit(@Bind("id") int id);
