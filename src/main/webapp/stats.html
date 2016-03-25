@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Code local 
+    <!-- Code local
     <script src="all.js"></script>-->
     
     <!-- odometer -->
@@ -24,16 +24,32 @@
 </head>
 
 <body bgcolor="#F0F0FF" >
-<nav class="navbar navbar-default">
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li><a href="/">Javascript</a></li>
-            <li><a href="/html/user">MVC Template (jsp)</a></li>
-            <li class="active"><a href="stats.html">Stats</a></li>
-        </ul>
+<nav class="navbar material_navbar material_navbar_success">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand material_navbar_brand" href="#">UOK</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
+            <ul class="nav navbar-nav material_navbar_nav">
+                <li><a href="index.html" class="material_navbar_nav_item">Javascript </a></li>
+                <li><a href="#" class="material_navbar_nav_item">MVC Template (jsp)</a></li>
+                <li class="active"><a href="stats.html" class="material_navbar_nav_item">Stats<span class="sr-only">(current)</span></a></li>
+
+            </ul>
+
+        </div>
     </div>
 </nav>
-<center>
+
+<div style="text-align: center;">
 <h1>Nombre d'utilisateur dans la base <br><br><br></h1>
 
 <div class="center-block" >
@@ -46,7 +62,7 @@
     <div class="odometer" id="odoEvent" ></div>
 </div>
 
-</center>
+</div>
     <script type="text/javascript">
             $(document).ready(function() {
                 setInterval(function(){ 

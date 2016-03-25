@@ -9,83 +9,123 @@
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <!-- theme bootstrap-->
+
+    <link rel="stylesheet" href="css/material-bootstrap.css">
 
     <!-- Code local -->
     <script src="all.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Javascript</a></li>
-            <li><a href="/html/user">MVC Template (jsp)</a></li>
-            <li><a href="stats.html">Stats</a></li>
-        </ul>
+
+
+<nav class="navbar material_navbar material_navbar_success">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand material_navbar_brand" href="#">UOK</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
+            <ul class="nav navbar-nav material_navbar_nav">
+                <li class="active"><a href="#" class="material_navbar_nav_item">Javascript <span class="sr-only">(current)</span></a></li>
+                <li><a href="#" class="material_navbar_nav_item">MVC Template (jsp)</a></li>
+                <li><a href="stats.html" class="material_navbar_nav_item">Stats</a></li>
+
+            </ul>
+
+        </div>
     </div>
 </nav>
 
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group ">
+
                 <label for="user">Utilisateur en mémoire : </label>
-                <input type="text" name="user" id="user" placeholder="Nom ?" class="form-control"/>
-                <input type="text" name="user" id="alias" placeholder="Surnom ?" class="form-control"/>
+
+                <div class="form-group materail_input_block">
+                    <input type="text" name="user" id="user" placeholder="Nom ?" class="form-control materail_input"/>
+                </div>
+
+                <div class="form-group materail_input_block">
+                    <input type="text" name="user" id="alias" placeholder="Surnom ?" class="form-control materail_input"/>
+                </div>
+
             </div>
             <div class="btn-group" role="group">
-                <button id="get-ram" class="btn btn-default">Lire</button>
-                <button id="post-ram" class="btn btn-primary">Sauver</button>
-                <button id="list-ram" class="btn btn-warning">Lister</button>
+                <button id="get-ram" class="btn btn-default material_btn">Lire</button>
+                <button id="post-ram" class="btn btn-default material_btn material_btn_primary">Sauver</button>
+                <button id="list-ram" class="btn btn-default material_btn material_btn_warning">Lister</button>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group ">
                 <label for="userdb">Utilisateur en base de données : </label>
-                <input type="text" name="userdb" id="userdb" placeholder="Nom ?" class="form-control"/>
-                <input type="text" name="user" id="aliasdb" placeholder="Surnom ?" class="form-control"/>
-                <input type="password" name="user" id="passwddb" class="form-control"/>
+                <div class="form-group materail_input_block">
+                    <input type="text" name="userdb" id="userdb" placeholder="Nom ?" class="form-control materail_input"/>
+                </div>
+                <div class="form-group materail_input_block">
+                    <input type="text" name="user" id="aliasdb" placeholder="Surnom ?" class="form-control materail_input"/>
+                </div>
+                <div class="form-group materail_input_block">
+                    <input type="password" name="user" id="passwddb" class="form-control materail_input"/>
+                </div>
             </div>
             <div class="btn-group" role="group">
-                <button id="get-bdd" class="btn btn-default">Lire</button>
-                <button id="post-bdd" class="btn btn-primary">Sauver</button>
-                <button id="list-bdd" class="btn btn-warning">Lister</button>
+                <button id="get-bdd" class="btn btn-default material_btn">Lire</button>
+                <button id="post-bdd" class="btn btn-default material_btn material_btn_primary">Sauver</button>
+                <button id="list-bdd" class="btn btn-default material_btn material_btn_warning">Lister</button>
             </div>
         </div>
     </div>
     <div class="row" style="margin-top: 20px;">
         <div class="col-md-12">
             <label for="user">S'identifier : </label>
-            <input type="text" name="userdb" id="userlogin" placeholder="Login" class="form-control"/>
-            <input type="password" name="user" id="passwdlogin" class="form-control"/>
+            <div class="form-group materail_input_block">
+                <input type="text" name="userdb" id="userlogin" placeholder="Login" class="form-control materail_input"/>
+            </div>
+            <div class="form-group materail_input_block">
+                <input type="password" name="user" id="passwdlogin" class="form-control materail_input"/>
+            </div>
             <br/>
-            <button id="read-forall" class="btn btn-default">Lire depuis /v1/secure/forall</button>
+            <button id="read-forall" class="btn btn-default material_btn">Lire depuis /v1/secure/forall</button>
             <br/>
-            <button id="read-forlogged" class="btn btn-default">Lire depuis /v1/secure/onlylogged</button>
+            <button id="read-forlogged" class="btn btn-default material_btn">Lire depuis /v1/secure/onlylogged</button>
             <br/>
-            <button id="read-byannotation" class="btn btn-default">Lire depuis /v1/secure/byannotation</button>
+            <button id="read-byannotation" class="btn btn-default material_btn">Lire depuis /v1/secure/byannotation</button>
         </div>
     </div>
     <div class="row" style="margin-top: 1em;">
-        <div class="panel panel-info">
-            <div class="panel-heading">Réponse</div>
-            <div class="panel-body" id="reponse">
+        <div class="panel panel-default material_panel material_panel_primary">
+            <div class="panel-heading material_panel_heading">Réponse</div>
+            <div class="panel-body material_panel_body" id="reponse">
             </div>
         </div>
     </div>
     <script type="text/javascript">
-			$(document).ready(function() {
-				$("#get-ram").click(function () {getUser($('#user').val(), $('#alias').val())});
-				$("#post-ram").click(function () {postUser($('#user').val(), $('#alias').val())});
-				$("#list-ram").click(function () {listUsers()});
-				$("#get-bdd").click(function () {getUserBdd($('#userdb').val(), $('#aliasdb').val())});
-				$("#post-bdd").click(function () {postUserBdd($('#userdb').val(), $('#aliasdb').val(), $('#passwddb').val())});
-				$("#list-bdd").click(function () {listUsersBdd()});
-				$("#read-forall").click(function () {getForAll()});
-				$("#read-forlogged").click(function () {getForLogged()});
-				$("#read-byannotation").click(function () {getByAnnotation()});
-			});
+        $(document).ready(function() {
+            $("#get-ram").click(function () {getUser($('#user').val(), $('#alias').val())});
+            $("#post-ram").click(function () {postUser($('#user').val(), $('#alias').val())});
+            $("#list-ram").click(function () {listUsers()});
+            $("#get-bdd").click(function () {getUserBdd($('#userdb').val(), $('#aliasdb').val())});
+            $("#post-bdd").click(function () {postUserBdd($('#userdb').val(), $('#aliasdb').val(), $('#passwddb').val())});
+            $("#list-bdd").click(function () {listUsersBdd()});
+            $("#read-forall").click(function () {getForAll()});
+            $("#read-forlogged").click(function () {getForLogged()});
+            $("#read-byannotation").click(function () {getByAnnotation()});
+        });
 
 
 
