@@ -5,10 +5,7 @@ import fr.iutinfo.skeleton.res.model.Invit;
 import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.utils.binders.BindEvent;
 import fr.iutinfo.skeleton.utils.binders.BindUser;
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
@@ -20,35 +17,37 @@ import java.util.List;
 public interface InvitDao {
     @SqlUpdate("create table IF NOT EXISTS invit (" +
 
-            "event INTEGER,"+
-            "user INTEGER, " +
+            "event INTEGER REFERENCES event(id),"+
+            "user INTEGER  REFERENCES users(id), " +
             "timestamp date, " +
             "isSecondaryList  boolean, " +
             "isFired boolean, " +
-            "CONSTRAINT pk_invit PRIMARY KEY (user,event)," +
-            "CONSTRAINT fk_invit_event FOREIGN KEY event REFERENCES event(id)," +
-            "CONSTRAINT fk_invit_user FOREIGN KEY user REFERENCES users(id))" )
+            "CONSTRAINT pk_invit PRIMARY KEY (user,event))" )
     void createUserTable();
 
     @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired)"+
             "values (:event, :user,:timestamp,:isSecondaryList,:isfired)")
     @GetGeneratedKeys
-    int insert(@BindEvent() Invit invit);
+    int insert(@BindBean() Invit invit);
 
     @SqlUpdate  ("DELETE from invit where event=:event AND user:=user")
     void deleteInvit(@Bind("event") int id, @Bind("user") int idUser);
 
 
     @SqlUpdate("drop table if exists invit")
-    void dropUserTable();
+    void dropInvitTable();
 
     @SqlQuery("select * from invit where event = :event")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Invit  findByEvent(@Bind("event") Event  event, User user);
+    List<Invit> findByEvent(@Bind("event") int idEvent);
+
+    @SqlQuery("select * from invit where user=:user")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    List<Invit> findByOwner(@Bind("user") int idUser);
 
 
 
-
+    void close();
 
 
 

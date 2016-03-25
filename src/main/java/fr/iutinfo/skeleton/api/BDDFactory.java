@@ -1,5 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
+import fr.iutinfo.skeleton.res.dao.InvitDao;
 import fr.iutinfo.skeleton.res.model.Event;
 import fr.iutinfo.skeleton.res.dao.EventDao;
 import fr.iutinfo.skeleton.res.model.User;
@@ -28,9 +29,11 @@ public class BDDFactory {
             //*
             UserDao udao = dbi.open(UserDao.class);
             EventDao edao = dbi.open(EventDao.class);
+            InvitDao invitDao = dbi.open(InvitDao.class);
             if (TODROP){
                 udao.dropUserTable();
                 edao.dropEventfTable();
+                invitDao.dropInvitTable();
             }
             udao.createUserTable();
             if (udao.all().isEmpty()){
@@ -63,6 +66,10 @@ public class BDDFactory {
                 //dum.
             }
             System.out.println("All : " + edao.all());
+            edao.close();
+
+            invitDao.createUserTable();
+            invitDao.close();
             //*/
         }
         return dbi;
