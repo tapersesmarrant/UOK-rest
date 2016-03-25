@@ -15,7 +15,7 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
  * Created by ouvryl on 25/03/16.
  */
 public interface UserCategoryDao {
-    @SqlUpdate("create table IF NOT EXISTS UserCategory (" +
+    @SqlUpdate("create table IF NOT EXISTS userCategory (" +
 
             "id INTEGER,"+
             "user VARCHAR(100), "+
@@ -33,7 +33,7 @@ public interface UserCategoryDao {
     void deleteInvit(@Bind("id") int id);
 
 
-    @SqlUpdate("drop table if exists group")
+    @SqlUpdate("drop table if exists userCategory")
     void dropUserTable();
 
     @SqlQuery("select * from group where id = :id")
