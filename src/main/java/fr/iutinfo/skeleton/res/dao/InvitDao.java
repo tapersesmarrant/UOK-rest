@@ -25,7 +25,9 @@ public interface InvitDao {
             "timestamp date, " +
             "isSecondaryList  boolean, " +
             "isFired boolean, " +
-            "CONSTRAINT pk_invit PRIMARY KEY (user,event)" )
+            "CONSTRAINT pk_invit PRIMARY KEY (user,event)," +
+            "CONSTRAINT fk_invit_event FOREIGN KEY event REFERENCES event(id)," +
+            "CONSTRAINT fk_invit_user FOREIGN KEY user REFERENCES users(id))" )
     void createUserTable();
 
     @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired)"+
@@ -34,7 +36,7 @@ public interface InvitDao {
     int insert(@BindEvent() Invit invit);
 
     @SqlUpdate  ("DELETE from invit where event=:event AND user:=user")
-    void deleteInvit(@Bind("id") int id);
+    void deleteInvit(@Bind("event") int id, @Bind("user") int idUser);
 
 
     @SqlUpdate("drop table if exists invit")
