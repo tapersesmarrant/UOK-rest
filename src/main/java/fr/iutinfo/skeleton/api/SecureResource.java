@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.model.UserDTO;
+import fr.iutinfo.skeleton.res.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,16 +20,16 @@ public class SecureResource {
 
     @GET
     @Path("/forall")
-    public UserDTO secureForAll(@Context SecurityContext context) {
-        return (UserDTO) context.getUserPrincipal();
+    public User secureForAll(@Context SecurityContext context) {
+        return (User) context.getUserPrincipal();
     }
 
     @GET
     @Path("/onlylogged")
-    public UserDTO secureForLoggedUsers(@Context SecurityContext context) {
-        UserDTO currentUser = (UserDTO) context.getUserPrincipal();
-        logger.debug("Current UserDTO :"+ currentUser.toString());
-        if (UserDTO.isAnonymous(currentUser)) {
+    public User secureForLoggedUsers(@Context SecurityContext context) {
+        User currentUser = (User) context.getUserPrincipal();
+        logger.debug("Current User :"+ currentUser.toString());
+        if (User.isAnonymous(currentUser)) {
             throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED).header(HttpHeaders.WWW_AUTHENTICATE, "Basic realm=\"Mon application\"").entity("Ressouce requires login.").build());
         }
         return currentUser;
@@ -38,8 +38,8 @@ public class SecureResource {
     @GET
     @Path("/byannotation")
     @RolesAllowed({"user"})
-    public UserDTO secureByAnnotation(@Context SecurityContext context) {
-        return (UserDTO) context.getUserPrincipal();
+    public User secureByAnnotation(@Context SecurityContext context) {
+        return (User) context.getUserPrincipal();
     }
 
 }

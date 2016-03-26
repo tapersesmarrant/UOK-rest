@@ -6,24 +6,23 @@ import com.google.common.base.Objects;
 /**
  * Created by nicbe on 24/03/2016.
  */
-public class UserCategoryDTO {
-
+public class InterestedCategory {
     private int id;
     private int user;
-    private String name;
+    private int category;
 
-    public UserCategoryDTO() {
-    }
-
-    public UserCategoryDTO(int id, int user, String name) {
+    public InterestedCategory(int id, int user, int category) {
         this.id = id;
         this.user = user;
-        this.name = name;
+        this.category = category;
     }
 
-    public UserCategoryDTO(int user, String name) {
+    public InterestedCategory(int user, int category) {
         this.user = user;
-        this.name = name;
+        this.category = category;
+    }
+
+    public InterestedCategory() {
     }
 
     public int getId() {
@@ -42,27 +41,27 @@ public class UserCategoryDTO {
         this.user = user;
     }
 
-    public String getName() {
-        return name;
+    public int getCategory() {
+        return category;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategory(int category) {
+        this.category = category;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserCategoryDTO that = (UserCategoryDTO) o;
+        InterestedCategory that = (InterestedCategory) o;
         return id == that.id &&
                 user == that.user &&
-                Objects.equal(name, that.name);
+                category == that.category;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, user, name);
+        return Objects.hashCode(id, user, category);
     }
 
     @Override
@@ -70,7 +69,7 @@ public class UserCategoryDTO {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("user", user)
-                .add("name", name)
+                .add("category", category)
                 .toString();
     }
 }

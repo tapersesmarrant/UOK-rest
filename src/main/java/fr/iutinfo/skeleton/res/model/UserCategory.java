@@ -6,23 +6,24 @@ import com.google.common.base.Objects;
 /**
  * Created by nicbe on 24/03/2016.
  */
-public class FixedCategoryDTO {
+public class UserCategory {
+
     private int id;
+    private int user;
     private String name;
-    private String icon;
 
-    public FixedCategoryDTO(int id, String name, String icon) {
-        this.id = id;
-        this.name = name;
-        this.icon = icon;
+    public UserCategory() {
     }
 
-    public FixedCategoryDTO(int id, String name) {
+    public UserCategory(int id, int user, String name) {
         this.id = id;
+        this.user = user;
         this.name = name;
     }
 
-    public FixedCategoryDTO(){
+    public UserCategory(int user, String name) {
+        this.user = user;
+        this.name = name;
     }
 
     public int getId() {
@@ -33,6 +34,14 @@ public class FixedCategoryDTO {
         this.id = id;
     }
 
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
+
     public String getName() {
         return name;
     }
@@ -41,35 +50,27 @@ public class FixedCategoryDTO {
         this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FixedCategoryDTO that = (FixedCategoryDTO) o;
+        UserCategory that = (UserCategory) o;
         return id == that.id &&
-                Objects.equal(name, that.name) &&
-                Objects.equal(icon, that.icon);
+                user == that.user &&
+                Objects.equal(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, icon);
+        return Objects.hashCode(id, user, name);
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
+                .add("user", user)
                 .add("name", name)
-                .add("icon", icon)
                 .toString();
     }
 }

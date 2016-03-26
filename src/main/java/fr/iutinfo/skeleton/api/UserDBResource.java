@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.model.UserDTO;
+import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.res.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class UserDBResource {
 	}
 	
 	@POST
-	public UserDTO createUser(UserDTO user) {
+	public User createUser(User user) {
         user.resetPasswordHash();
         int id = dao.insert(user);
         user.setId(id);
@@ -31,8 +31,8 @@ public class UserDBResource {
 
 	@GET
 	@Path("/byEmail/{email}")
-	public UserDTO getUser(@PathParam("email") String email) {
-		UserDTO user = dao.findByEmail(email);
+	public User getUser(@PathParam("email") String email) {
+		User user = dao.findByEmail(email);
 		if (user == null) {
 			throw new WebApplicationException(404);
 		}
@@ -41,8 +41,8 @@ public class UserDBResource {
 
 	@GET
 	@Path("/byNum/{number}")
-	public UserDTO getUserByNumber(@PathParam("number") String number) {
-		UserDTO user = dao.findByNumber(number);
+	public User getUserByNumber(@PathParam("number") String number) {
+		User user = dao.findByNumber(number);
 		if (user == null) {
 			throw new WebApplicationException(404);
 		}
@@ -51,8 +51,8 @@ public class UserDBResource {
 
     @GET
     @Path("/{id}")
-    public UserDTO getUserById(@PathParam("id") int id){
-        UserDTO user = dao.findById(id);
+    public User getUserById(@PathParam("id") int id){
+        User user = dao.findById(id);
         if (user == null) {
             throw new WebApplicationException(404);
         }
@@ -63,8 +63,8 @@ public class UserDBResource {
     @PUT
     @Path("/{id}")
     public Response updateUser(@PathParam("id") int id,
-                               UserDTO user) {
-        UserDTO oldUser = dao.findById(id);
+                               User user) {
+        User oldUser = dao.findById(id);
         logger.info("Should update user with id: " + id + " (" + oldUser + ") to " + user);
         if (user == null) {
             throw new WebApplicationException(404);
@@ -78,7 +78,7 @@ public class UserDBResource {
     @DELETE
     @Path("/{id}")
     public Response deleteUser(@PathParam("id") int id) {
-        UserDTO user = dao.findById(id);
+        User user = dao.findById(id);
         if (user == null) {
             throw new WebApplicationException(404);
         }
@@ -87,7 +87,7 @@ public class UserDBResource {
     }
 
 	@GET
-	public List<UserDTO> getAllUsers() {
+	public List<User> getAllUsers() {
 		return dao.all();
 	}
 

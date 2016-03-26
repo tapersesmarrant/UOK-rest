@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.auth;
 
-import fr.iutinfo.skeleton.res.model.UserDTO;
+import fr.iutinfo.skeleton.res.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,10 +9,10 @@ import java.security.Principal;
 
 public class AppSecurityContext implements SecurityContext {
     final static Logger logger = LoggerFactory.getLogger(AppSecurityContext.class);
-    private UserDTO user;
+    private User user;
     private String scheme;
 
-    public AppSecurityContext(UserDTO user, String scheme) {
+    public AppSecurityContext(User user, String scheme) {
         this.user = user;
         this.scheme = scheme;
     }

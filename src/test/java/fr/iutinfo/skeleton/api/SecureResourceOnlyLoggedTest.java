@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.model.UserDTO;
+import fr.iutinfo.skeleton.res.model.User;
 import org.glassfish.jersey.internal.util.Base64;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Before;
@@ -34,7 +34,7 @@ public class SecureResourceOnlyLoggedTest extends JerseyTest {
     public void should_return_current_user_with_authorization_header() {
         h.createUserWithPassword("tclavier", "motdepasse", "graindesel");
         String authorization = "Basic " + Base64.encodeAsString("tclavier:motdepasse");
-        UserDTO utilisateur = target(path).request().header(AUTHORIZATION, authorization).get(UserDTO.class);
+        User utilisateur = target(path).request().header(AUTHORIZATION, authorization).get(User.class);
         assertEquals("tclavier", utilisateur.getName());
     }
 

@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import java.security.Principal;
 import java.security.SecureRandom;
 
-public class UserDTO implements Principal {
-    final static Logger logger = LoggerFactory.getLogger(UserDTO.class);
+public class User implements Principal {
+    final static Logger logger = LoggerFactory.getLogger(User.class);
 
     private String name;
     private String alias;
@@ -28,23 +28,23 @@ public class UserDTO implements Principal {
     private boolean isAcceptingGlobal =true;
 
 
-    private static UserDTO anonymous = new UserDTO(-1, "Anonymous", "anonym");
+    private static User anonymous = new User(-1, "Anonymous", "anonym");
 
-    public UserDTO(int id, String name) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public UserDTO(int id, String name, String alias) {
+    public User(int id, String name, String alias) {
         this.id = id;
         this.name = name;
         this.alias = alias;
     }
 
-    public UserDTO() {
+    public User() {
     }
 
-    public void updateFrom(UserDTO user){
+    public void updateFrom(User user){
         logger.info("Lokking for change of this user (id {}) from {}",id,user);
 
         if (StrUtils.newValue(name,user.name)){
@@ -142,7 +142,7 @@ public class UserDTO implements Principal {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserDTO user = (UserDTO) o;
+        User user = (User) o;
         return id == user.id &&
                 isPro == user.isPro &&
                 isAcceptingGlobal == user.isAcceptingGlobal &&
@@ -215,11 +215,11 @@ public class UserDTO implements Principal {
         return ! (id == anonymous.getId());
     }
 
-    public static UserDTO getAnonymousUser() {
+    public static User getAnonymousUser() {
         return anonymous ;
     }
 
-    public static boolean isAnonymous(UserDTO currentUser) {
+    public static boolean isAnonymous(User currentUser) {
         return currentUser.getId() == getAnonymousUser().getId();
     }
 

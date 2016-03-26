@@ -8,17 +8,17 @@ import java.util.Date;
 /**
  * Created by nicbe on 24/03/2016.
  */
-public class InvitDTO {
+public class Invit {
     private int event;
     private int user;
     private Date timestamp;
     private boolean isSecondaryList;
     private boolean isFired;
 
-    public InvitDTO() {
+    public Invit() {
     }
 
-    public InvitDTO(int event, int user, Date timestamp, boolean isSecondaryList, boolean isFired) {
+    public Invit(int event, int user, Date timestamp, boolean isSecondaryList, boolean isFired) {
         this.event = event;
         this.user = user;
         this.timestamp = timestamp;
@@ -70,7 +70,7 @@ public class InvitDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InvitDTO invit = (InvitDTO) o;
+        Invit invit = (Invit) o;
         return event == invit.event &&
                 user == invit.user &&
                 isSecondaryList == invit.isSecondaryList &&

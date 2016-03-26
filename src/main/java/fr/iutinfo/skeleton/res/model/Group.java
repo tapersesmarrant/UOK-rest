@@ -6,17 +6,17 @@ import com.google.common.base.Objects;
 /**
  * Created by nicbe on 24/03/2016.
  */
-public class GroupDTO {
+public class Group {
     private int id;
     private int owner;
     private String name;
     private int fixedCategory;
     private int categoryUser;
 
-    public GroupDTO() {
+    public Group() {
     }
 
-    public GroupDTO(int id, int owner, String name, int fixedCategory, int categoryUser) {
+    public Group(int id, int owner, String name, int fixedCategory, int categoryUser) {
         this.id = id;
         this.owner = owner;
         this.name = name;
@@ -24,7 +24,7 @@ public class GroupDTO {
         this.categoryUser = categoryUser;
     }
 
-    public GroupDTO(int owner, String name, int fixedCategory, int categoryUser) {
+    public Group(int owner, String name, int fixedCategory, int categoryUser) {
         this.owner = owner;
         this.name = name;
         this.fixedCategory = fixedCategory;
@@ -75,7 +75,7 @@ public class GroupDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GroupDTO group = (GroupDTO) o;
+        Group group = (Group) o;
         return id == group.id &&
                 owner == group.owner &&
                 fixedCategory == group.fixedCategory &&

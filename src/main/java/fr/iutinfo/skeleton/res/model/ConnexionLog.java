@@ -3,26 +3,25 @@ package fr.iutinfo.skeleton.res.model;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import java.util.Date;
+
 /**
  * Created by nicbe on 24/03/2016.
  */
-public class InterestedCategoryDTO {
-    private int id;
+public class ConnexionLog {
+
+    private int id;;
+    private Date timestamp;
     private int user;
-    private int category;
 
-    public InterestedCategoryDTO(int id, int user, int category) {
+
+    public ConnexionLog(int id, Date timestamp, int user) {
         this.id = id;
+        this.timestamp = timestamp;
         this.user = user;
-        this.category = category;
     }
 
-    public InterestedCategoryDTO(int user, int category) {
-        this.user = user;
-        this.category = category;
-    }
-
-    public InterestedCategoryDTO() {
+    public ConnexionLog() {
     }
 
     public int getId() {
@@ -33,6 +32,14 @@ public class InterestedCategoryDTO {
         this.id = id;
     }
 
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public int getUser() {
         return user;
     }
@@ -41,35 +48,27 @@ public class InterestedCategoryDTO {
         this.user = user;
     }
 
-    public int getCategory() {
-        return category;
-    }
-
-    public void setCategory(int category) {
-        this.category = category;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InterestedCategoryDTO that = (InterestedCategoryDTO) o;
+        ConnexionLog that = (ConnexionLog) o;
         return id == that.id &&
                 user == that.user &&
-                category == that.category;
+                Objects.equal(timestamp, that.timestamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, user, category);
+        return Objects.hashCode(id, timestamp, user);
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
+                .add("timestamp", timestamp)
                 .add("user", user)
-                .add("category", category)
                 .toString();
     }
 }

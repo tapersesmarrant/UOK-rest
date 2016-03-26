@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.model.EventDTO;
+import fr.iutinfo.skeleton.res.model.Event;
 import fr.iutinfo.skeleton.res.dao.EventDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class EventDBResource {
 	}
 	
 	@POST
-	public EventDTO createUser(EventDTO user) {
+	public Event createUser(Event user) {
         int id = dao.insert(user);
         user.setId(id);
 		return user;
@@ -30,22 +30,22 @@ public class EventDBResource {
 
     @GET
     @Path("/{id}")
-    public EventDTO getUserById(@PathParam("id") int id){
-        EventDTO eventDTO = dao.findById(id);
-        if (eventDTO == null) {
+    public Event getUserById(@PathParam("id") int id){
+        Event event = dao.findById(id);
+        if (event == null) {
             throw new WebApplicationException(404);
         }
-        return eventDTO;
+        return event;
     }
 
     @GET
     @Path("/owner/{id}")
-    public List<EventDTO> getUserByOwner(@PathParam("id") int id){
+    public List<Event> getUserByOwner(@PathParam("id") int id){
         return dao.all(id);
     }
 
 	@GET
-	public List<EventDTO> getAllUsers() {
+	public List<Event> getAllUsers() {
 		return dao.all();
 	}
 

@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.model.UserDTO;
+import fr.iutinfo.skeleton.res.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,11 +17,11 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
-    private static Map<Integer, UserDTO> users = new HashMap<>();
+    private static Map<Integer, User> users = new HashMap<>();
     Logger logger = LoggerFactory.getLogger(UserResource.class);
 
     @POST
-    public UserDTO createUser(UserDTO user) {
+    public User createUser(User user) {
         int id = users.size();
         user.setId(id + 1);
         users.put(user.getId(), user);
@@ -37,8 +37,8 @@ public class UserResource {
         return Response.accepted().status(Status.NOT_FOUND).build();
     }
 
-    protected UserDTO find(String name) {
-        for (UserDTO user : users.values()) {
+    protected User find(String name) {
+        for (User user : users.values()) {
             if (user.getName().equals(name)) {
                 return user;
             }
@@ -46,15 +46,15 @@ public class UserResource {
         return null;
     }
 
-    protected UserDTO find(int id) {
+    protected User find(int id) {
         return users.get(id);
     }
 
     @PUT
     @Path("{id}")
     public Response updateUser(@PathParam("id") int id,
-                               UserDTO user) {
-        UserDTO oldUser = find(id);
+                               User user) {
+        User oldUser = find(id);
         logger.info("Should update user with id: " + id + " (" + oldUser + ") to " + user);
         if (user == null) {
             throw new WebApplicationException(404);
@@ -65,8 +65,8 @@ public class UserResource {
 
     @GET
     @Path("/{name}")
-    public UserDTO getUser(@PathParam("name") String name) {
-        UserDTO out = find(name);
+    public User getUser(@PathParam("name") String name) {
+        User out = find(name);
         if (out == null) {
             throw new WebApplicationException(404);
         }
@@ -74,7 +74,7 @@ public class UserResource {
     }
 
     @GET
-    public List<UserDTO> getUsers(@DefaultValue("10") @QueryParam("limit") int limit) {
+    public List<User> getUsers(@DefaultValue("10") @QueryParam("limit") int limit) {
         return new ArrayList<>(users.values());
     }
 

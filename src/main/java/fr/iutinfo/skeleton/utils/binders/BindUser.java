@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.utils.binders;
 
-import fr.iutinfo.skeleton.res.model.UserDTO;
+import fr.iutinfo.skeleton.res.model.User;
 import org.skife.jdbi.v2.SQLStatement;
 import org.skife.jdbi.v2.sqlobject.Binder;
 import org.skife.jdbi.v2.sqlobject.BinderFactory;
@@ -14,8 +14,8 @@ import java.lang.annotation.*;
 public @interface BindUser {
     public static class UserBinderFactory implements BinderFactory {
         public Binder build(Annotation annotation) {
-            return new Binder<BindUser, UserDTO>() {
-                public void bind(SQLStatement q, BindUser bind, UserDTO user) {
+            return new Binder<BindUser, User>() {
+                public void bind(SQLStatement q, BindUser bind, User user) {
                     q.bind("name", user.getName());
                     q.bind("alias", user.getAlias());
                     q.bind("id", user.getId());

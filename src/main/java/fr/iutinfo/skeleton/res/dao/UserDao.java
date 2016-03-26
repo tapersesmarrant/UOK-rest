@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.res.dao;
 
-import fr.iutinfo.skeleton.res.model.UserDTO;
+import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.utils.binders.BindUser;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
@@ -24,11 +24,11 @@ public interface UserDao {
 
 	@SqlUpdate("insert into users (name,alias ,email,isPro, telNumber, passwdHash, salt, location, global) values (:name, :alias, :email, :isPro, :telNumber, :hash, :salt, :location, :isAcceptingGlobal)")
 	@GetGeneratedKeys
-	int insert(@BindUser() UserDTO user);
+	int insert(@BindUser() User user);
 
 	@SqlUpdate("UPDATE users SET name=:name ,alias=:alias ,email=:email,isPro=:isPro, telNumber=:telNumber, passwdHash=:hash, salt=:salt, location=:location, global=:isAcceptingGlobal WHERE id=:id")
 	@GetGeneratedKeys
-	int updateUser(@BindUser() UserDTO user);
+	int updateUser(@BindUser() User user);
 
     @SqlUpdate  ("DELETE from users where id= :id")
     void deleteUser(@Bind("id") int id);
@@ -36,28 +36,28 @@ public interface UserDao {
 
 	@SqlQuery("select * from users where name = :name")
     @RegisterMapperFactory(BeanMapperFactory.class)
-	UserDTO findByName(@Bind("name") String name);
+	User findByName(@Bind("name") String name);
 
 	@SqlUpdate("drop table if exists users")
 	void dropUserTable(); 
 
 	@SqlQuery("select * from users order by id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	List<UserDTO> all();
+	List<User> all();
 
 	@SqlQuery("select * from users where id = :id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	UserDTO findById(@Bind("id") int id);
+	User findById(@Bind("id") int id);
 
 
 	@SqlQuery("select * from users where email = :email")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	UserDTO findByEmail(@Bind("email") String  email);
+	User findByEmail(@Bind("email") String  email);
 
 
 	@SqlQuery("select * from users where telNumber = :telNumber")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	UserDTO findByNumber(@Bind("telNumber") String telNumber);
+	User findByNumber(@Bind("telNumber") String telNumber);
 
 	void close();
 }
