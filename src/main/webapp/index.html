@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
+    <!-- google prettify -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
     <!-- theme bootstrap-->
 
     <link rel="stylesheet" href="css/material-bootstrap.css">
@@ -101,10 +104,14 @@
             </div>
             <br/>
             <button id="read-forall" class="btn btn-default material_btn">Lire depuis /v1/secure/forall</button>
-            <br/>
+
             <button id="read-forlogged" class="btn btn-default material_btn">Lire depuis /v1/secure/onlylogged</button>
-            <br/>
+
             <button id="read-byannotation" class="btn btn-default material_btn">Lire depuis /v1/secure/byannotation</button>
+
+            <button id="read-me" class="btn btn-default material_btn">Lire depuis /v1/me</button>
+
+            <button id="read-meAll" class="btn btn-default material_btn">Lire depuis /v1/me/userFull</button>
         </div>
     </div>
     <div class="row" style="margin-top: 1em;">
@@ -125,6 +132,8 @@
             $("#read-forall").click(function () {getForAll()});
             $("#read-forlogged").click(function () {getForLogged()});
             $("#read-byannotation").click(function () {getByAnnotation()});
+            $("#read-me").click(function () {getSecure("v1/me")});
+            $("#read-meAll").click(function () {getSecure("v1/me/userFull")});
         });
 
 

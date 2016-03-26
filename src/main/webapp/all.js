@@ -95,7 +95,8 @@ function listUsersGeneric(url) {
 
 function afficheUser(data) {
 	console.log(data);
-	$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
+	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
+	$("#reponse").html("<code class=\"prettyprint\">" + JSON.stringify(data, null, 4) + "</code>")
 }
 
 function afficheError(data) {
