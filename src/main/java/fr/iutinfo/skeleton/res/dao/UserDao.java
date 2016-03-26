@@ -35,8 +35,12 @@ public interface UserDao {
 
 
 	@SqlQuery("select * from users where name = :name")
-    @RegisterMapperFactory(BeanMapperFactory.class)
+	@RegisterMapperFactory(BeanMapperFactory.class)
 	User findByName(@Bind("name") String name);
+
+	@SqlQuery("select id,name from users where name = :name")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	User findByNameLimited(@Bind("name") String name);
 
 	@SqlUpdate("drop table if exists users")
 	void dropUserTable(); 
@@ -48,6 +52,10 @@ public interface UserDao {
 	@SqlQuery("select * from users where id = :id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	User findById(@Bind("id") int id);
+
+	@SqlQuery("select id,name from users where id = :id")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	User findByIdLimited(@Bind("id") int id);
 
 
 	@SqlQuery("select * from users where email = :email")

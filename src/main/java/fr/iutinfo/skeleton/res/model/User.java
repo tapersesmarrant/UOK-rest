@@ -82,7 +82,6 @@ public class User implements Principal {
 
         logger.info("Edditing is done for id {}",id);
 
-
     }
 
     public String getEmail() {
