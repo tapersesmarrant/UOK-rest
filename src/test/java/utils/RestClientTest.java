@@ -1,7 +1,7 @@
 package utils;
 
 import fr.iutinfo.skeleton.api.BDDFactory;
-import fr.iutinfo.skeleton.res.model.User;
+import fr.iutinfo.skeleton.res.model.UserDTO;
 import fr.iutinfo.skeleton.api.UserDBResource;
 import fr.iutinfo.skeleton.res.dao.UserDao;
 import fr.iutinfo.skeleton.utils.RestClient;
@@ -37,9 +37,9 @@ public class RestClientTest extends JerseyTest {
     public void should_return_2_clients() {
         String baseUrl = this.getBaseUri() + "userdb/";
         RestClient client = new RestClient();
-        client.addUser(new User(0, "Thomas"), baseUrl);
-        client.addUser(new User(0, "Yann"), baseUrl);
-        List<User> users = client.getUrlAsUser(baseUrl);
+        client.addUser(new UserDTO(0, "Thomas"), baseUrl);
+        client.addUser(new UserDTO(0, "Yann"), baseUrl);
+        List<UserDTO> users = client.getUrlAsUser(baseUrl);
         assertEquals(2, users.size());
     }
 }

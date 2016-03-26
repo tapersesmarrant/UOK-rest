@@ -6,23 +6,24 @@ import com.google.common.base.Objects;
 /**
  * Created by nicbe on 24/03/2016.
  */
-public class InterestedCategory {
+public class UserCategoryDTO {
+
     private int id;
     private int user;
-    private int category;
+    private String name;
 
-    public InterestedCategory(int id, int user, int category) {
+    public UserCategoryDTO() {
+    }
+
+    public UserCategoryDTO(int id, int user, String name) {
         this.id = id;
         this.user = user;
-        this.category = category;
+        this.name = name;
     }
 
-    public InterestedCategory(int user, int category) {
+    public UserCategoryDTO(int user, String name) {
         this.user = user;
-        this.category = category;
-    }
-
-    public InterestedCategory() {
+        this.name = name;
     }
 
     public int getId() {
@@ -41,27 +42,27 @@ public class InterestedCategory {
         this.user = user;
     }
 
-    public int getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory(int category) {
-        this.category = category;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InterestedCategory that = (InterestedCategory) o;
+        UserCategoryDTO that = (UserCategoryDTO) o;
         return id == that.id &&
                 user == that.user &&
-                category == that.category;
+                Objects.equal(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, user, category);
+        return Objects.hashCode(id, user, name);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class InterestedCategory {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("user", user)
-                .add("category", category)
+                .add("name", name)
                 .toString();
     }
 }

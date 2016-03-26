@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
-import fr.iutinfo.skeleton.res.model.User;
+import fr.iutinfo.skeleton.res.model.UserDTO;
 import fr.iutinfo.skeleton.res.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,34 +25,34 @@ public class Helper {
         dao.createUserTable();
     }
 
-    User createUserWithName(String name) {
-        User user = new User(0, name);
+    UserDTO createUserWithName(String name) {
+        UserDTO user = new UserDTO(0, name);
         return doPost(user);
     }
 
-    User createUserWithAlias(String name, String alias) {
-        User user = new User(0, name, alias);
+    UserDTO createUserWithAlias(String name, String alias) {
+        UserDTO user = new UserDTO(0, name, alias);
         return doPost(user);
     }
 
 
-    User createUserWithEmail(String name, String email) {
-        User user = new User(0, name);
+    UserDTO createUserWithEmail(String name, String email) {
+        UserDTO user = new UserDTO(0, name);
         user.setEmail(email);
         return doPost(user);
     }
 
-    User createUserWithPassword(String name, String passwd, String salt) {
-        User user = new User(0, name);
+    UserDTO createUserWithPassword(String name, String passwd, String salt) {
+        UserDTO user = new UserDTO(0, name);
         user.setSalt(salt);
         user.setPassword(passwd);
         logger.debug("createUserWithPassword Hash : " + user.getPasswdHash());
         return doPost(user);
     }
 
-    User doPost(User user) {
-        Entity<User> userEntity = Entity.entity(user, MediaType.APPLICATION_JSON);
-        return target.request().post(userEntity).readEntity(User.class);
+    UserDTO doPost(UserDTO user) {
+        Entity<UserDTO> userEntity = Entity.entity(user, MediaType.APPLICATION_JSON);
+        return target.request().post(userEntity).readEntity(UserDTO.class);
     }
 
 }

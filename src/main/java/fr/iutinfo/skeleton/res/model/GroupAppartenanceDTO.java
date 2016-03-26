@@ -6,14 +6,14 @@ import com.google.common.base.Objects;
 /**
  * Created by nicbe on 24/03/2016.
  */
-public class GroupAppartenance {
+public class GroupAppartenanceDTO {
     private int group;
     private int user;
 
-    public GroupAppartenance() {
+    public GroupAppartenanceDTO() {
     }
 
-    public GroupAppartenance(int group, int user) {
+    public GroupAppartenanceDTO(int group, int user) {
         this.group = group;
         this.user = user;
     }
@@ -38,7 +38,7 @@ public class GroupAppartenance {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GroupAppartenance that = (GroupAppartenance) o;
+        GroupAppartenanceDTO that = (GroupAppartenanceDTO) o;
         return group == that.group &&
                 user == that.user;
     }

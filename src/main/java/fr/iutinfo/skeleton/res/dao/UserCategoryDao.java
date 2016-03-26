@@ -1,8 +1,7 @@
 package fr.iutinfo.skeleton.res.dao;
 
-import fr.iutinfo.skeleton.res.model.Group;
-import fr.iutinfo.skeleton.res.model.Invit;
-import fr.iutinfo.skeleton.res.model.UserCategory;
+import fr.iutinfo.skeleton.res.model.GroupDTO;
+import fr.iutinfo.skeleton.res.model.UserCategoryDTO;
 import fr.iutinfo.skeleton.utils.binders.BindEvent;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
@@ -27,7 +26,7 @@ public interface UserCategoryDao {
     @SqlUpdate("insert into group (id, user,name)"+
             "values (:id, :user ,:name)")
     @GetGeneratedKeys
-    int insert(@BindEvent() UserCategory userCategory);
+    int insert(@BindEvent() UserCategoryDTO userCategory);
 
     @SqlUpdate  ("DELETE from userCategory where id=:id")
     void deleteInvit(@Bind("id") int id);
@@ -38,5 +37,5 @@ public interface UserCategoryDao {
 
     @SqlQuery("select * from group where id = :id")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Group findByid(@Bind("id") int id);
+    GroupDTO findByid(@Bind("id") int id);
 }

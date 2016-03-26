@@ -1,10 +1,6 @@
 package fr.iutinfo.skeleton.res.dao;
 
-import fr.iutinfo.skeleton.res.model.Event;
-import fr.iutinfo.skeleton.res.model.Invit;
-import fr.iutinfo.skeleton.res.model.User;
-import fr.iutinfo.skeleton.utils.binders.BindEvent;
-import fr.iutinfo.skeleton.utils.binders.BindUser;
+import fr.iutinfo.skeleton.res.model.InvitDTO;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
@@ -28,7 +24,7 @@ public interface InvitDao {
     @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired)"+
             "values (:event, :user,:timestamp,:isSecondaryList,:isfired)")
     @GetGeneratedKeys
-    int insert(@BindBean() Invit invit);
+    int insert(@BindBean() InvitDTO invit);
 
     @SqlUpdate  ("DELETE from invit where event=:event AND user:=user")
     void deleteInvit(@Bind("event") int id, @Bind("user") int idUser);
@@ -39,11 +35,11 @@ public interface InvitDao {
 
     @SqlQuery("select * from invit where event = :event")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<Invit> findByEvent(@Bind("event") int idEvent);
+    List<InvitDTO> findByEvent(@Bind("event") int idEvent);
 
     @SqlQuery("select * from invit where user=:user")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<Invit> findByOwner(@Bind("user") int idUser);
+    List<InvitDTO> findByOwner(@Bind("user") int idUser);
 
 
 

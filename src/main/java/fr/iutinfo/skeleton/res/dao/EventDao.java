@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.res.dao;
 
-import fr.iutinfo.skeleton.res.model.Event;
+import fr.iutinfo.skeleton.res.model.EventDTO;
 import fr.iutinfo.skeleton.utils.binders.BindEvent;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
@@ -35,14 +35,14 @@ public interface EventDao {
     @SqlUpdate("insert into event (owner, location,date,name,limitTime,isLock,isRush,isTime,timeBeforeRush,cost,isDone,isCanceled)" +
             " values (:owner, :location,:date,:name,:limitTime,:isLock,:isRush,:isTime,:timeBeforeRush,:cost,:isDone,:isCanceled)")
     @GetGeneratedKeys
-    int insert(@BindEvent() Event event);
+    int insert(@BindEvent() EventDTO event);
 
     @SqlUpdate("UPDATE event SET" +
             "owner=:owner, location=:location,date=:date,name=:name,limitTime=:limitTime," +
             "isLock=:isLock,isRush=:isRush,isTime=:isTime,timeBeforeRush=:timeBeforeRush,cost=:cost,isDone=:isDone,isCanceled=:isCanceled" +
             " WHERE id=:id")
     @GetGeneratedKeys
-    int updateEvent(@BindEvent() Event event);
+    int updateEvent(@BindEvent() EventDTO event);
 
     @SqlUpdate  ("DELETE from event where id= :id")
     void deleteEvent(@Bind("id") int id);
@@ -50,23 +50,23 @@ public interface EventDao {
 
     @SqlQuery("select * from event where name = :name")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Event findByName(@Bind("name") String name);
+    EventDTO findByName(@Bind("name") String name);
 
     @SqlQuery("select * from event where id = :id")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Event findById(@Bind("id") int id);
+    EventDTO findById(@Bind("id") int id);
 
     @SqlUpdate("drop table if exists event")
     void dropEventfTable();
 
     @SqlQuery("select * from event order by id")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<Event> all();
+    List<EventDTO> all();
 
 
     @SqlQuery("select * from event where owner=:user order by id")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<Event> all(@Bind("user") int userId);
+    List<EventDTO> all(@Bind("user") int userId);
 
 
     void close();

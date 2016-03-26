@@ -1,9 +1,9 @@
 package fr.iutinfo.skeleton.api;
 
 import fr.iutinfo.skeleton.res.dao.InvitDao;
-import fr.iutinfo.skeleton.res.model.Event;
+import fr.iutinfo.skeleton.res.model.EventDTO;
 import fr.iutinfo.skeleton.res.dao.EventDao;
-import fr.iutinfo.skeleton.res.model.User;
+import fr.iutinfo.skeleton.res.model.UserDTO;
 import fr.iutinfo.skeleton.res.dao.UserDao;
 import org.skife.jdbi.v2.DBI;
 import org.h2.jdbcx.JdbcDataSource;
@@ -38,12 +38,12 @@ public class BDDFactory {
             udao.createUserTable();
             if (udao.all().isEmpty()){
                 //telNumber
-                User dum = new User(1,"0000", "0000");
+                UserDTO dum = new UserDTO(1,"0000", "0000");
                 dum.setPassword("0000");
                 dum.setTelNumber("060011223344");
                 dum.setEmail("a.b@c.fr");
                 udao.insert(dum);
-                dum = new User(2,"1111", "1111");
+                dum = new UserDTO(2,"1111", "1111");
                 dum.setPassword("1111");
                 dum.setTelNumber("060011223344");
                 dum.setEmail("a.bc@c.fr");
@@ -54,7 +54,7 @@ public class BDDFactory {
             //*
             edao.createEventTable();
             if (edao.all().isEmpty()){
-                Event dum = new Event();
+                EventDTO dum = new EventDTO();
                 dum.setOwner(1);
                 dum.setLocation("in your mom home");
                 dum.setTime(true);
@@ -79,7 +79,7 @@ public class BDDFactory {
     public static void main(String... args){
 
         EventDao edao = getDbi().open(EventDao.class);
-        Event dum = new Event();
+        EventDTO dum = new EventDTO();
         dum.setOwner(1);
         dum.setLocation("in your mom home");
         dum.setTime(true);

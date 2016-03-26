@@ -15,7 +15,7 @@ import java.util.Date;
  *
  * @author ouvryl beaussart
  */
-public class Event {
+public class EventDTO {
 
     private int id=0;
     private int owner;
@@ -32,9 +32,9 @@ public class Event {
     private boolean isCanceled =false;
     private String desciption;
 
-    public Event(){}
+    public EventDTO(){}
     
-    public Event(int id, int onwer, Date date, String description){
+    public EventDTO(int id, int onwer, Date date, String description){
         this.id=id;
         this.date=date;
         this.owner=onwer;
@@ -160,21 +160,21 @@ public class Event {
 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return id == event.id &&
-                owner == event.owner &&
-                isLock == event.isLock &&
-                isRush == event.isRush &&
-                isTime == event.isTime &&
-                timeBeforeRush == event.timeBeforeRush &&
-                cost == event.cost &&
-                isDone == event.isDone &&
-                isCanceled == event.isCanceled &&
-                Objects.equal(location, event.location) &&
-                Objects.equal(date, event.date) &&
-                Objects.equal(name, event.name) &&
-                Objects.equal(limiteTime, event.limiteTime) &&
-                Objects.equal(desciption, event.desciption);
+        EventDTO eventDTO = (EventDTO) o;
+        return id == eventDTO.id &&
+                owner == eventDTO.owner &&
+                isLock == eventDTO.isLock &&
+                isRush == eventDTO.isRush &&
+                isTime == eventDTO.isTime &&
+                timeBeforeRush == eventDTO.timeBeforeRush &&
+                cost == eventDTO.cost &&
+                isDone == eventDTO.isDone &&
+                isCanceled == eventDTO.isCanceled &&
+                Objects.equal(location, eventDTO.location) &&
+                Objects.equal(date, eventDTO.date) &&
+                Objects.equal(name, eventDTO.name) &&
+                Objects.equal(limiteTime, eventDTO.limiteTime) &&
+                Objects.equal(desciption, eventDTO.desciption);
     }
 
     @Override

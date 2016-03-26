@@ -2,7 +2,7 @@ package fr.iutinfo.skeleton.web;
 
 
 import fr.iutinfo.skeleton.api.BDDFactory;
-import fr.iutinfo.skeleton.res.model.User;
+import fr.iutinfo.skeleton.res.model.UserDTO;
 import fr.iutinfo.skeleton.res.dao.UserDao;
 import org.glassfish.jersey.server.mvc.Template;
 
@@ -19,15 +19,15 @@ public class UserViews {
 
     @GET
     @Template
-    public List<User> getAll() {
+    public List<UserDTO> getAll() {
         return dao.all();
     }
 
     @GET
     @Template(name = "detail")
     @Path("/{id}")
-    public User getDetail(@PathParam("id") String id) {
-        User user = dao.findById(Integer.parseInt(id));
+    public UserDTO getDetail(@PathParam("id") String id) {
+        UserDTO user = dao.findById(Integer.parseInt(id));
         if (user == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }

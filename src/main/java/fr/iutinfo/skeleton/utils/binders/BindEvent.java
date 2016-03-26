@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.utils.binders;
 
-import fr.iutinfo.skeleton.res.model.Event;
+import fr.iutinfo.skeleton.res.model.EventDTO;
 import org.skife.jdbi.v2.SQLStatement;
 import org.skife.jdbi.v2.sqlobject.Binder;
 import org.skife.jdbi.v2.sqlobject.BinderFactory;
@@ -14,8 +14,8 @@ import java.lang.annotation.*;
 public @interface BindEvent {
     public static class UserBinderFactory implements BinderFactory {
         public Binder build(Annotation annotation) {
-            return new Binder<BindEvent, Event>() {
-                public void bind(SQLStatement q, BindEvent bind, Event event) {
+            return new Binder<BindEvent, EventDTO>() {
+                public void bind(SQLStatement q, BindEvent bind, EventDTO event) {
                     q.bind("id", event.getId());
                     q.bind("owner", event.getOwner());
                     q.bind("location", event.getLocation());
