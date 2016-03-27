@@ -11,10 +11,7 @@ import javax.jws.soap.SOAPBinding;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.*;
 import java.util.List;
 
 /**
@@ -29,9 +26,9 @@ public class PerosnalDBResource {
 
 
     @GET
-    public User secureForLoggedUsers(@Context SecurityContext context) {
+    public Response secureForLoggedUsers(@Context SecurityContext context) {
         User currentUser = getCurrent(context);
-        return userDao.findByIdLimited(currentUser.getId());
+        return Response.ok("{ \"id\":"+currentUser.getId() + ", \"name\":\""+currentUser.getName()+"\"}", MediaType.APPLICATION_JSON).build();
     }
     @GET
     @Path("/userFull")
