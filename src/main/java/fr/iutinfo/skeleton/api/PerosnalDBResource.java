@@ -71,6 +71,7 @@ public class PerosnalDBResource {
     @POST
     @Path("/event")
     public Response postEvent(@Context SecurityContext context, Event event){
+        System.out.println(event);
         event.setOwner(getCurrent(context).getId());
         int id = eventDao.insert(event);
         for (Invit invit : event.getInvit()){
