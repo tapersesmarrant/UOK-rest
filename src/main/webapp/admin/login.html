@@ -21,14 +21,14 @@
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                 <div class="fg-line">
-                    <input type="text" class="form-control" placeholder="Compte">
+                    <input id="user" type="text" class="form-control" placeholder="Compte">
                 </div>
             </div>
             
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
                 <div class="fg-line">
-                    <input type="password" class="form-control" placeholder="Mot de passe">
+                    <input id="passwd" type="password" class="form-control" placeholder="Mot de passe">
                 </div>
             </div>
             
@@ -36,13 +36,13 @@
             
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="">
+                    <input id="keepLogged" type="checkbox" value="">
                     <i class="input-helper"></i>
                     Keep me signed in
                 </label>
             </div>
             
-            <a id="login-button" href="" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
+            <a id="login-button" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
         </div>
         s
         <!-- Older IE warning message -->
@@ -93,6 +93,12 @@
         <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         
         <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+
+        <!-- -->
+
+        <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+
+        <!-- -->
         
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
@@ -100,6 +106,8 @@
         <![endif]-->
         
         <script src="js/functions.js"></script>
+        <script src="js/tools.js"></script>
+        <script src="js/login.js"></script>
         
     </body>
 </html>

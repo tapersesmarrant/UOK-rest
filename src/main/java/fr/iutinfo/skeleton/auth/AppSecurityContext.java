@@ -28,7 +28,7 @@ public class AppSecurityContext implements SecurityContext {
         if ("user".equals(s)){
             return user.isInUserGroup();
         } else if ("admin".equals(s)){
-            return user.isInAdminGroup();
+            return  user.isInAdminGroup();
         } else
             return true;
 

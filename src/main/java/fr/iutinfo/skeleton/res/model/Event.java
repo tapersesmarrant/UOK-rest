@@ -20,7 +20,7 @@ public class Event {
 
     private int id=0;
     private int owner;
-    private String location ;
+    private String location;
     private Date date;
     private String name;
     private Date limiteTime;
