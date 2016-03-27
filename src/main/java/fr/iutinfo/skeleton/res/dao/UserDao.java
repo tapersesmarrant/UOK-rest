@@ -13,17 +13,17 @@ public interface UserDao {
             "id integer primary key auto_increment, " +
             "name varchar(100) UNIQUE, " +
             "alias varchar(100), " +
-            "email varchar(100), " +
+            "email varchar(100) UNIQUE , " +
             "passwdHash varchar(32), " +
             "salt varchar(32), " +
             "telNumber varchar(32) UNIQUE , " +
             "isPro BOOLEAN, " +
             "location VARCHAR(32)," +
-			"role INT," +
+			"role VARCHAR(32)," +
             "global BOOLEAN )")
 	void createUserTable();
 
-	@SqlUpdate("insert into users (name,alias ,email,isPro, telNumber, passwdHash, salt, location, global, role) values (:name, :alias, :email, :isPro, :telNumber, :hash, :salt, :location, :isAcceptingGlobal, ;role)")
+	@SqlUpdate("insert into users (name,alias ,email,isPro, telNumber, passwdHash, salt, location, global, role) values (:name, :alias, :email, :isPro, :telNumber, :hash, :salt, :location, :isAcceptingGlobal, :role)")
 	@GetGeneratedKeys
 	int insert(@BindUser() User user);
 

@@ -41,13 +41,19 @@ public class BDDFactory {
                 //telNumber
                 User dum = new User(1,"0000", "0000");
                 dum.setPassword("0000");
-                dum.setTelNumber("060011223344");
-                dum.setEmail("a.b@c.fr");
+                dum.setTelNumber("0000000000");
+                dum.setEmail("aaaa@c.fr");
                 udao.insert(dum);
                 dum = new User(2,"1111", "1111");
                 dum.setPassword("1111");
-                dum.setTelNumber("060011223344");
-                dum.setEmail("a.bc@c.fr");
+                dum.setTelNumber("1111111111");
+                dum.setEmail("bbbb@c.fr");
+                udao.insert(dum);
+                dum = new User(2,"admin", "admin");
+                dum.setPassword("admin");
+                dum.setTelNumber("0681711827");
+                dum.setEmail("ccc@c.fr");
+                dum.setRole(User.Roles.admin);
                 udao.insert(dum);
             }
             System.out.println(udao.all());

@@ -16,7 +16,7 @@ public class User implements Principal {
     final static Logger logger = LoggerFactory.getLogger(User.class);
 
 
-    private enum Roles{ user, admin }
+    public enum Roles{ user, admin }
 
     private String name;
     private String alias;
@@ -29,7 +29,7 @@ public class User implements Principal {
     private boolean isPro;
     private String location;
     private boolean isAcceptingGlobal =true;
-    private int role = Roles.user.ordinal();
+    private Roles role = Roles.user;
 
 
     private static User anonymous = new User(-1, "Anonymous", "anonym");
@@ -172,12 +172,13 @@ public class User implements Principal {
                 Objects.equal(passwdHash, user.passwdHash) &&
                 Objects.equal(salt, user.salt) &&
                 Objects.equal(telNumber, user.telNumber) &&
-                Objects.equal(location, user.location);
+                Objects.equal(location, user.location) &&
+                role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name, alias, id, email, password, passwdHash, salt, telNumber, isPro, location, isAcceptingGlobal);
+        return Objects.hashCode(name, alias, id, email, password, passwdHash, salt, telNumber, isPro, location, isAcceptingGlobal, role);
     }
 
     @Override
@@ -194,7 +195,7 @@ public class User implements Principal {
                 .add("isPro", isPro)
                 .add("location", location)
                 .add("isAcceptingGlobal", isAcceptingGlobal)
-                .omitNullValues()
+                .add("role", role)
                 .toString();
     }
 
@@ -286,11 +287,11 @@ public class User implements Principal {
     }
 
     public Roles getRole() {
-        return Roles.values()[role];
+        return role;
     }
 
     public void setRole(Roles role) {
-        this.role = role.ordinal();
+        this.role = role;
     }
 
 }
