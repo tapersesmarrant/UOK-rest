@@ -3,6 +3,7 @@ package fr.iutinfo.skeleton.api;
 import fr.iutinfo.skeleton.res.dao.InvitDao;
 import fr.iutinfo.skeleton.res.model.Event;
 import fr.iutinfo.skeleton.res.dao.EventDao;
+import fr.iutinfo.skeleton.res.model.Invit;
 import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.res.dao.UserDao;
 import org.skife.jdbi.v2.DBI;
@@ -69,6 +70,13 @@ public class BDDFactory {
             edao.close();
 
             invitDao.createUserTable();
+            if (invitDao.all().isEmpty()){
+                System.out.println("found empty !");
+                Invit invit = new Invit(1,2,new Date(),false,false);
+                invitDao.insert(invit);
+                System.out.println("Inserted !");
+            }
+            System.out.println(invitDao.all());
             invitDao.close();
             //*/
         }

@@ -47,6 +47,9 @@ public interface EventDao {
     @SqlUpdate  ("DELETE from event where id= :id")
     void deleteEvent(@Bind("id") int id);
 
+    @SqlQuery("SELECT name from event where id=:id")
+    String getName(@Bind("id") int id);
+
 
     @SqlQuery("select * from event where name = :name")
     @RegisterMapperFactory(BeanMapperFactory.class)

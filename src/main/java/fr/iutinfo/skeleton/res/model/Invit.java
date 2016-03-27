@@ -14,6 +14,7 @@ public class Invit {
     private Date timestamp;
     private boolean isSecondaryList;
     private boolean isFired;
+    private String nameEvent;
 
     public Invit() {
     }
@@ -92,5 +93,13 @@ public class Invit {
                 .add("isSecondaryList", isSecondaryList)
                 .add("isFired", isFired)
                 .toString();
+    }
+
+    public String getNameEvent() {
+        return nameEvent;
+    }
+
+    public void setNameEvent(String nameEvent) {
+        this.nameEvent = nameEvent;
     }
 }

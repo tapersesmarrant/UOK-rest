@@ -25,7 +25,9 @@ function getByAnnotation() {
 }
 
  function getSecure(url) {
+     console.log(url);
  if($("#userlogin").val() != "") {
+     console.log("user not empty");
      $.ajax
      ({
        type: "GET",
@@ -96,7 +98,8 @@ function listUsersGeneric(url) {
 function afficheUser(data) {
 	console.log(data);
 	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
-	$("#reponse").html("<code class=\"prettyprint\">" + JSON.stringify(data, null, 4) + "</code>")
+	//$("#reponse").html("<code class=\"prettyprint\">" + JSON.stringify(data, null, 4) + "</code>")
+    $("#reponse").html(syntaxHighlight(data));
 }
 
 function afficheError(data) {
@@ -115,4 +118,11 @@ function afficheListUsers(data) {
 	}
 	html = html + "</ul>";
 	$("#reponse").html(html);
+}
+
+
+function syntaxHighlight(json) {
+    //import JSONFormatter from 'json-formatter-js'
+    var formatter = new JSONFormatter(json);
+    return formatter.render();
 }

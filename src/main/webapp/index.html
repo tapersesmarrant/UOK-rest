@@ -15,6 +15,9 @@
 
     <!-- google prettify -->
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="js/jsonformater.js"></script>
+    <link rel="stylesheet" href="css/jsonformater.css">
+
 
     <!-- theme bootstrap-->
 
@@ -112,6 +115,8 @@
             <button id="read-me" class="btn btn-default material_btn">Lire depuis /v1/me</button>
 
             <button id="read-meAll" class="btn btn-default material_btn">Lire depuis /v1/me/userFull</button>
+            <button id="read-meEvents" class="btn btn-default material_btn">Lire depuis /v1/me/myEvents</button>
+            <button id="read-meInvits" class="btn btn-default material_btn">Lire depuis /v1/me/myInvints</button>
         </div>
     </div>
     <div class="row" style="margin-top: 1em;">
@@ -134,6 +139,9 @@
             $("#read-byannotation").click(function () {getByAnnotation()});
             $("#read-me").click(function () {getSecure("v1/me")});
             $("#read-meAll").click(function () {getSecure("v1/me/userFull")});
+            $("#read-meEvents").click(function () {getSecure("v1/me/myEvents")}); // myInvints
+            $("#read-meinvits").click(function () {getSecure("v1/me/myInvints")}); // myInvints
+
         });
 
 

@@ -4,6 +4,7 @@ import fr.iutinfo.skeleton.res.model.Event;
 import fr.iutinfo.skeleton.res.model.Invit;
 import fr.iutinfo.skeleton.res.model.User;
 import fr.iutinfo.skeleton.utils.binders.BindEvent;
+import fr.iutinfo.skeleton.utils.binders.BindInvit;
 import fr.iutinfo.skeleton.utils.binders.BindUser;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
@@ -28,10 +29,10 @@ public interface InvitDao {
     @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired)"+
             "values (:event, :user,:timestamp,:isSecondaryList,:isfired)")
     @GetGeneratedKeys
-    int insert(@BindBean() Invit invit);
+    int insert(@BindInvit() Invit invit);
 
     @SqlUpdate  ("DELETE from invit where event=:event AND user:=user")
-    void deleteInvit(@Bind("event") int id, @Bind("user") int idUser);
+    void deleteInvit(@Bind("event") int idEvent, @Bind("user") int idUser);
 
 
     @SqlUpdate("drop table if exists invit")
@@ -49,8 +50,7 @@ public interface InvitDao {
 
     void close();
 
-
-
-
-
+    @SqlQuery("SELECT * from invit")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    List<Invit> all();
 }
