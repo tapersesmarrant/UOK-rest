@@ -72,8 +72,9 @@ public class PerosnalDBResource {
     @Path("/event")
     public Response postEvent(@Context SecurityContext context, Event event){
         event.setOwner(getCurrent(context).getId());
-        eventDao.insert(event);
+        int id = eventDao.insert(event);
         for (Invit invit : event.getInvit()){
+            invit.setEvent(id);
             if (invit.getUser() <= 0){
                 invitDao.insert(invit);
             } else {
