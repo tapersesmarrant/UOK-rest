@@ -15,6 +15,9 @@ import java.security.SecureRandom;
 public class User implements Principal {
     final static Logger logger = LoggerFactory.getLogger(User.class);
 
+
+    private enum Roles{ user, admin }
+
     private String name;
     private String alias;
     private int id = 0;
@@ -26,6 +29,7 @@ public class User implements Principal {
     private boolean isPro;
     private String location;
     private boolean isAcceptingGlobal =true;
+    private int role = Roles.user.ordinal();
 
 
     private static User anonymous = new User(-1, "Anonymous", "anonym");
@@ -43,6 +47,8 @@ public class User implements Principal {
 
     public User() {
     }
+
+
 
     public User anonymise(){
         this.alias = null;
@@ -225,7 +231,11 @@ public class User implements Principal {
     }
 
     public boolean isInUserGroup(){
-        return ! (id == anonymous.getId());
+        return getRole() == Roles.admin || getRole() == Roles.user;
+    }
+
+    public boolean isInAdminGroup(){
+        return getRole() == Roles.admin;
     }
 
     public static User getAnonymousUser() {
@@ -274,4 +284,13 @@ public class User implements Principal {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public Roles getRole() {
+        return Roles.values()[role];
+    }
+
+    public void setRole(Roles role) {
+        this.role = role.ordinal();
+    }
+
 }

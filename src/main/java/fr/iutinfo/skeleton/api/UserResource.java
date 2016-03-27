@@ -1,12 +1,13 @@
 package fr.iutinfo.skeleton.api;
 
+import com.google.common.base.Strings;
+import fr.iutinfo.skeleton.res.dao.UserDao;
 import fr.iutinfo.skeleton.res.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.Status;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,65 +18,80 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
-    private static Map<Integer, User> users = new HashMap<>();
+
     Logger logger = LoggerFactory.getLogger(UserResource.class);
+    private static UserDao dao = BDDFactory.getDbi().onDemand(UserDao.class);
 
     @POST
-    public User createUser(User user) {
-        int id = users.size();
-        user.setId(id + 1);
-        users.put(user.getId(), user);
-        return user;
-    }
-
-    @DELETE
-    @Path("{id}")
-    public Response deleteUser(@PathParam("id") Integer id) {
-        if (users.containsKey(id)) {
-            return Response.accepted().status(Status.ACCEPTED).build();
+    public Response createUser(User user) {
+        if (Strings.nullToEmpty(user.getTelNumber()).isEmpty()){
+            return Response.status(Status.BAD_REQUEST).entity("field telNumer is required.").build();
         }
-        return Response.accepted().status(Status.NOT_FOUND).build();
-    }
-
-    protected User find(String name) {
-        for (User user : users.values()) {
-            if (user.getName().equals(name)) {
-                return user;
-            }
+        if (dao.findByNumber(user.getTelNumber()) != null){
+            return Response.status(Status.CONFLICT).entity(dao.findByNumber(user.getTelNumber()).getAlias()).build();
         }
-        return null;
-    }
-
-    protected User find(int id) {
-        return users.get(id);
+        if (Strings.nullToEmpty(user.getPassword()).isEmpty()){
+            return Response.status(Status.BAD_REQUEST).entity("field password is required.").build();
+        }
+        if (Strings.nullToEmpty(user.getEmail()).isEmpty()){
+            return Response.status(Status.BAD_REQUEST).entity("field email is required.").build();
+        }
+        user.resetPasswordHash();
+        dao.insert(user);
+        return Response.ok(dao.findByNumber(user.getTelNumber())).build();
     }
 
     @PUT
-    @Path("{id}")
-    public Response updateUser(@PathParam("id") int id,
+    @Path("/{id}")
+    public Response updateUser(@Context SecurityContext context, @PathParam("id")int id,
                                User user) {
-        User oldUser = find(id);
-        logger.info("Should update user with id: " + id + " (" + oldUser + ") to " + user);
-        if (user == null) {
-            throw new WebApplicationException(404);
+        User currrent = PerosnalDBResource.getCurrent(context);
+        if (currrent.getId() != id){
+            throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED).entity("Not your own id").build());
         }
-        oldUser.setName(user.getName());
-        return Response.status(200).entity(oldUser).build();
+        currrent.updateFrom(user);
+        dao.updateUser(currrent);
+        return Response.status(200).entity(currrent).build();
     }
 
     @GET
-    @Path("/{name}")
-    public User getUser(@PathParam("name") String name) {
-        User out = find(name);
-        if (out == null) {
+    @Path("/byNumber/{number}")
+    public User getUserByNumber(@Context SecurityContext context, @PathParam("number") String number) {
+
+        User currentUser = (User) context.getUserPrincipal();
+        logger.debug("Current User :"+ currentUser.toString());
+        User user = dao.findByNumber(number);
+        if (user == null){
             throw new WebApplicationException(404);
         }
-        return out;
+        if (User.isAnonymous(currentUser) || user.getId() != currentUser.getId()) {
+            user.anonymise();
+        }
+        return user;
+    }
+
+    @GET
+    @Path("/byEmail/{email}")
+    public User getUserByEmail(@Context SecurityContext context, @PathParam("email") String email) {
+
+        User currentUser = (User) context.getUserPrincipal();
+        User user = dao.findByNumber(email);
+        if (user == null){
+            throw new WebApplicationException(404);
+        }
+        if (User.isAnonymous(currentUser) || user.getId() != currentUser.getId()) {
+            user.anonymise();
+        }
+        return user;
     }
 
     @GET
     public List<User> getUsers(@DefaultValue("10") @QueryParam("limit") int limit) {
-        return new ArrayList<>(users.values());
+        List<User> alls = dao.all();
+        for (User all : alls) {
+            all.anonymise();
+        }
+        return alls;
     }
 
 }

@@ -27,7 +27,9 @@ public class AppSecurityContext implements SecurityContext {
         logger.debug("isUserInRole called for : "+ s);
         if ("user".equals(s)){
             return user.isInUserGroup();
-        }
+        } else if ("admin".equals(s)){
+            return user.isInAdminGroup();
+        } else
             return true;
 
     }

@@ -11,22 +11,23 @@ import java.util.List;
 public interface UserDao {
 	@SqlUpdate("create table IF NOT EXISTS users (" +
             "id integer primary key auto_increment, " +
-            "name varchar(100), " +
+            "name varchar(100) UNIQUE, " +
             "alias varchar(100), " +
             "email varchar(100), " +
             "passwdHash varchar(32), " +
             "salt varchar(32), " +
-            "telNumber varchar(32), " +
+            "telNumber varchar(32) UNIQUE , " +
             "isPro BOOLEAN, " +
             "location VARCHAR(32)," +
+			"role INT," +
             "global BOOLEAN )")
 	void createUserTable();
 
-	@SqlUpdate("insert into users (name,alias ,email,isPro, telNumber, passwdHash, salt, location, global) values (:name, :alias, :email, :isPro, :telNumber, :hash, :salt, :location, :isAcceptingGlobal)")
+	@SqlUpdate("insert into users (name,alias ,email,isPro, telNumber, passwdHash, salt, location, global, role) values (:name, :alias, :email, :isPro, :telNumber, :hash, :salt, :location, :isAcceptingGlobal, ;role)")
 	@GetGeneratedKeys
 	int insert(@BindUser() User user);
 
-	@SqlUpdate("UPDATE users SET name=:name ,alias=:alias ,email=:email,isPro=:isPro, telNumber=:telNumber, passwdHash=:hash, salt=:salt, location=:location, global=:isAcceptingGlobal WHERE id=:id")
+	@SqlUpdate("UPDATE users SET name=:name ,alias=:alias ,email=:email,isPro=:isPro, telNumber=:telNumber, passwdHash=:hash, salt=:salt, location=:location, global=:isAcceptingGlobal , role=:role WHERE id=:id")
 	@GetGeneratedKeys
 	int updateUser(@BindUser() User user);
 

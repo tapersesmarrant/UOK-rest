@@ -14,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.List;
 
+
 /**
  * Created by nicbe on 25/03/2016.
  */
@@ -29,6 +30,7 @@ public class PerosnalDBResource {
     @GET
     public Response secureForLoggedUsers(@Context SecurityContext context) {
         User currentUser = getCurrent(context);
+
         return Response.ok("{ \"id\":"+currentUser.getId() + ", \"name\":\""+currentUser.getName()+"\"}", MediaType.APPLICATION_JSON).build();
     }
 
@@ -123,7 +125,7 @@ public class PerosnalDBResource {
         return event;
     }
 
-    private User getCurrent(SecurityContext context){
+    static User getCurrent(SecurityContext context){
         User currentUser = (User) context.getUserPrincipal();
         logger.debug("Current User :"+ currentUser.toString());
         if (User.isAnonymous(currentUser)) {

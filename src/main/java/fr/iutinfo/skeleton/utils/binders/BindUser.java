@@ -26,6 +26,7 @@ public @interface BindUser {
                     q.bind("isPro", user.isPro());
                     q.bind("location", user.getLocation());
                     q.bind("isAcceptingGlobal", user.isAcceptingGlobal());
+                    q.bind("role", user.getRole());
                 }
             };
         }

@@ -29,6 +29,7 @@ public class Event {
     private boolean isTime;
     private int timeBeforeRush;
     private int cost;
+    private int nmbPlaces;
     private boolean isDone =false;
     private boolean isCanceled =false;
     private String desciption;
