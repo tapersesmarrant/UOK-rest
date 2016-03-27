@@ -116,7 +116,7 @@
 
             <button id="read-meAll" class="btn btn-default material_btn">Lire depuis /v1/me/userFull</button>
             <button id="read-meEvents" class="btn btn-default material_btn">Lire depuis /v1/me/myEvents</button>
-            <button id="read-meInvits" class="btn btn-default material_btn">Lire depuis /v1/me/myInvints</button>
+            <button id="read-getInvits" class="btn btn-default material_btn">Lire depuis /v1/me/myInvints</button>
         </div>
     </div>
     <div class="row" style="margin-top: 1em;">
@@ -140,7 +140,7 @@
             $("#read-me").click(function () {getSecure("v1/me")});
             $("#read-meAll").click(function () {getSecure("v1/me/userFull")});
             $("#read-meEvents").click(function () {getSecure("v1/me/myEvents")}); // myInvints
-            $("#read-meinvits").click(function () {getSecure("v1/me/myInvints")}); // myInvints
+            $("#read-getInvits").click(function () {getSecure("v1/me/myInvints")}); // myInvints
 
         });
 
