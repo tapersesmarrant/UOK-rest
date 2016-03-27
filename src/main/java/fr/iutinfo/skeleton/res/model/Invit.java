@@ -14,7 +14,9 @@ public class Invit {
     private Date timestamp;
     private boolean isSecondaryList;
     private boolean isFired;
+    private boolean isOk;
     private String nameEvent;
+    private User userObject;
 
     public Invit() {
     }
@@ -101,5 +103,21 @@ public class Invit {
 
     public void setNameEvent(String nameEvent) {
         this.nameEvent = nameEvent;
+    }
+
+    public User getUserObject() {
+        return userObject;
+    }
+
+    public void setUserObject(User userObject) {
+        this.userObject = userObject;
+    }
+
+    public boolean isOk() {
+        return isOk;
+    }
+
+    public void setOk(boolean ok) {
+        isOk = ok;
     }
 }

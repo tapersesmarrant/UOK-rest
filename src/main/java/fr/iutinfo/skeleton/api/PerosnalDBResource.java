@@ -10,9 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jws.soap.SOAPBinding;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.List;
 
@@ -33,6 +31,7 @@ public class PerosnalDBResource {
         User currentUser = getCurrent(context);
         return Response.ok("{ \"id\":"+currentUser.getId() + ", \"name\":\""+currentUser.getName()+"\"}", MediaType.APPLICATION_JSON).build();
     }
+
     @GET
     @Path("/userFull")
     public User secureForLoggedUsersFull(@Context SecurityContext context) {
@@ -50,12 +49,78 @@ public class PerosnalDBResource {
     @GET
     @Path("/myInvints")
     public List<Invit> getAllInvits(@Context SecurityContext context){
-        System.out.println("asked for my invits");
         List<Invit> list = invitDao.findByOwner(getCurrent(context).getId());
         for (Invit invit : list){
             invit.setNameEvent(eventDao.getName(invit.getEvent()));
         }
         return list;
+    }
+
+    @PUT
+    @Path("/invit/{eventId}")
+    public Invit putInvit(@Context SecurityContext context, @PathParam("eventId") int eventId, Invit invit){
+        Invit dbinvint = invitDao.getInvitBy(eventId, getCurrent(context).getId());
+        dbinvint.setFired(true);
+        dbinvint.setOk(invit.isOk());
+        invitDao.update(dbinvint);
+        return dbinvint;
+    }
+
+    @POST
+    @Path("/event")
+    public Response postEvent(@Context SecurityContext context, Event event){
+        event.setOwner(getCurrent(context).getId());
+        eventDao.insert(event);
+        for (Invit invit : event.getInvit()){
+            if (invit.getUser() <= 0){
+                invitDao.insert(invit);
+            } else {
+                User user = invit.getUserObject();
+                User telUser = userDao.findByNumber(user.getTelNumber());
+                if (telUser != null){
+                    invit.setUser(telUser.getId());
+                    invitDao.insert(invit);
+                } else {
+                    userDao.insert(user);
+                }
+            }
+
+        }
+        return Response.accepted().build();
+    }
+
+    @GET
+    @Path("/event/{id}")
+    public Event getEvent(@Context SecurityContext context, @PathParam("id") int id){
+        User user = getCurrent(context);
+        Event event = eventDao.findById(id);
+        boolean haveToFilter = event.getOwner() != user.getId();
+        event.setInvit(invitDao.findByEvent(event.getId()));
+        boolean hasFoundUser = false;
+
+        for (Invit invit :  event.getInvit()){
+            if (!hasFoundUser){
+                hasFoundUser = user.getId() == invit.getUser();
+                invit.setFired(true);
+                invitDao.insert(invit);
+            }
+            if (user.getId() == invit.getUser()){
+                hasFoundUser = true;
+            } else if (haveToFilter){
+                invit.setUserObject(userDao.findById(invit.getUser()).minAnonymise());
+            } else {
+                invit.setUserObject(userDao.findById(invit.getUser()).anonymise());
+            }
+
+        }
+
+        if (!hasFoundUser && !haveToFilter){
+            throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Vous n'êtes pas dans l'evenemnt").build());
+        }
+
+
+        return event;
     }
 
     private User getCurrent(SecurityContext context){

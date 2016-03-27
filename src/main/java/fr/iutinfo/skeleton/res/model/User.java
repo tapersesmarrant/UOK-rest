@@ -44,6 +44,20 @@ public class User implements Principal {
     public User() {
     }
 
+    public User anonymise(){
+        this.alias = null;
+        password = null;
+        passwdHash = null;
+        location = null;
+        return this;
+    }
+
+    public User minAnonymise(){
+        alias = null;
+        location = null;
+        return this;
+    }
+
     public void updateFrom(User user){
         logger.info("Lokking for change of this user (id {}) from {}",id,user);
 

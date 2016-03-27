@@ -10,6 +10,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Event {
     private boolean isDone =false;
     private boolean isCanceled =false;
     private String desciption;
+    private List<Invit> invit;
 
     public Event(){}
     
@@ -200,5 +202,13 @@ public class Event {
                 .add("isCanceled", isCanceled)
                 .add("desciption", desciption)
                 .toString();
+    }
+
+    public List<Invit> getInvit() {
+        return invit;
+    }
+
+    public void setInvit(List<Invit> invit) {
+        this.invit = invit;
     }
 }

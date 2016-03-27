@@ -21,6 +21,7 @@ public @interface BindInvit {
                     q.bind("timestamp", invit.getTimestamp());
                     q.bind("isSecondaryList", invit.isSecondaryList());
                     q.bind("isfired", invit.isFired());
+                    q.bind("isOk", invit.isOk());
                 }
             };
         }

@@ -37,6 +37,9 @@ dependencies {
     // Guava for the win!
     compile 'com.google.guava:guava:18.0'
 
+    compile 'com.google.code.gson:gson:2.6.2'
+
+
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
 
     // testing library

@@ -23,16 +23,21 @@ public interface InvitDao {
             "timestamp date, " +
             "isSecondaryList  boolean, " +
             "isFired boolean, " +
+            "isOk boolean, " +
             "CONSTRAINT pk_invit PRIMARY KEY (user,event))" )
     void createUserTable();
 
-    @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired)"+
-            "values (:event, :user,:timestamp,:isSecondaryList,:isfired)")
+    @SqlUpdate("insert into invit (event, user,timestamp ,isSecondaryList,isFired, isOk)"+
+            "values (:event, :user,:timestamp,:isSecondaryList,:isfired, :isOk)")
     @GetGeneratedKeys
     int insert(@BindInvit() Invit invit);
 
     @SqlUpdate  ("DELETE from invit where event=:event AND user:=user")
     void deleteInvit(@Bind("event") int idEvent, @Bind("user") int idUser);
+
+
+    @SqlUpdate ("UPDATE invit SET isFired=:isfired, isOk=:isOk where user=:user and evnet=:event")
+    void update(@BindInvit() Invit invit);
 
 
     @SqlUpdate("drop table if exists invit")
@@ -46,7 +51,9 @@ public interface InvitDao {
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<Invit> findByOwner(@Bind("user") int idUser);
 
-
+    @SqlQuery("select * from invit where user=:user and event=:event")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    Invit getInvitBy(@Bind("event") int event, @Bind("user") int user);
 
     void close();
 
