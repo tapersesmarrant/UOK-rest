@@ -75,18 +75,19 @@ public class PerosnalDBResource {
         int id = eventDao.insert(event);
         for (Invit invit : event.getInvit()){
             invit.setEvent(id);
-            if (invit.getUser() <= 0){
+
+            User user = invit.getUserObject();
+            User telUser = userDao.findByNumber(user.getTelNumber());
+            if (telUser != null){
+                invit.setUser(telUser.getId());
                 invitDao.insert(invit);
             } else {
-                User user = invit.getUserObject();
-                User telUser = userDao.findByNumber(user.getTelNumber());
-                if (telUser != null){
-                    invit.setUser(telUser.getId());
-                    invitDao.insert(invit);
-                } else {
-                    userDao.insert(user);
-                }
+                User newUser = new User();
+                newUser.setTelNumber(user.getTelNumber());
+                invit.setUser(userDao.insert(newUser));
+                invitDao.insert(invit);
             }
+
 
         }
         return Response.accepted().build();
