@@ -19,6 +19,8 @@ import java.util.List;
  * Created by nicbe on 25/03/2016.
  */
 @Path("/me")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PerosnalDBResource {
     final static Logger logger = LoggerFactory.getLogger(PerosnalDBResource.class);
 

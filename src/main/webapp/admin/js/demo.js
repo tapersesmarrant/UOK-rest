@@ -6,7 +6,7 @@ $(window).load(function(){
         },{
             type: type,
             allow_dismiss: false,
-            label: 'Cancel',
+            label: 'e',
             className: 'btn-xs btn-inverse',
             placement: {
                 from: 'top',
@@ -23,10 +23,10 @@ $(window).load(function(){
             }
         });
     };
-    
+    /*
     if (!$('.login-content')[0]) {
         notify('Welcome back Mallinda Hollaway', 'inverse');
-    } 
+    }*/
 });
 
 
@@ -35,7 +35,6 @@ $(document).ready(function(){
     if ($('.login-content')[0]) {
         //Add class to HTML. This is used to center align the logn box
         $('body').on('click', '.login-navigation > li', function(){
-            alert("lol");
         });
     }
 

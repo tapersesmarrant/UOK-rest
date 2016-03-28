@@ -48,8 +48,3 @@ function tryLoggin(login,  passwd) {
     }
 }
 
-function loginFailed(){
-
-}
-
-

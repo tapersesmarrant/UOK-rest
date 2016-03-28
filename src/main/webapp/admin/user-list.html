@@ -209,7 +209,43 @@
     <!-- contenu -->
 
     <section id="content">
+        <div class="container">
+            <div class="block-header">
+                <h2>Data Table</h2>
 
+                <ul class="actions">
+                    <li>
+                        <a id="refresh">
+                            <i class="zmdi zmdi-refresh"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Liste d'utilistateurs<small>Random text.</small></h2>
+                </div>
+
+                <table id="data-table-command" class="table table-striped table-vmiddle">
+                    <thead>
+                    <tr>
+                        <th data-column-id="id" data-type="numeric">ID</th>
+                        <th data-column-id="name">name</th>
+                        <th data-column-id="alias">alias</th>
+                        <th data-column-id="email">email</th>
+                        <th data-column-id="pro">pro</th>
+                        <th data-column-id="role">role</th>
+                        <th data-column-id="number">telephone</th>
+                        <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
+                    </tr>
+                    </thead>
+                    <tbody id="boddy-table">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
     <!-- fin contenu-->
 
@@ -282,19 +318,11 @@
 <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="vendors/bower_components/flot/jquery.flot.js"></script>
-<script src="vendors/bower_components/flot/jquery.flot.resize.js"></script>
-<script src="vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
-<script src="vendors/sparklines/jquery.sparkline.min.js"></script>
-<script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-
-<script src="vendors/bower_components/moment/min/moment.min.js"></script>
-<script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js "></script>
-<script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
+<script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
 <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
 <script src="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
-<script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="vendors/bootgrid/jquery.bootgrid.updated.min.js"></script>
 
 <!-- Placeholder for IE9 -->
 <!--[if IE 9 ]>
@@ -309,6 +337,82 @@
 <script src="js/functions.js"></script>
 <script src="js/demo.js"></script>
 <script src="js/tools.js"></script>
+
+
+<!-- Data Table -->
+<script type="text/javascript">
+    function getUsers() {
+        $.ajax
+        ({
+            type: "GET",
+            url: "../v1/admin/user",
+            dataType: 'json',
+            beforeSend : function(req) {
+                req.setRequestHeader("Authorization", readCookie("auth"));
+            },
+            success: function (data){
+                console.dir(data);
+                $("#data-table-command").bootgrid("clear");
+                for(var i= 0; i < data.length; i++){
+                    $("#data-table-command").bootgrid("append", [{
+                        id  : data[i].id ,
+                        name : data[i].name,
+                        alias: data[i].alias,
+                        email: data[i].email,
+                        pro: data[i].pro,
+                        role: data[i].role,
+                        number: data[i].telNumber
+                    }]);
+                }
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                alert('error: ' + textStatus);
+
+            }
+        });
+    }
+    $(document).ready(function(){
+
+
+        //Command Buttons
+        var grid = $("#data-table-command").bootgrid({
+            css: {
+                icon: 'zmdi icon',
+                iconColumns: 'zmdi-view-module',
+                iconDown: 'zmdi-expand-more',
+                iconRefresh: 'zmdi-refresh',
+                iconUp: 'zmdi-expand-less'
+            },
+
+            formatters: {
+                "commands": function(column, row) {
+                    return "<button type=\"button\" class=\"btn btn-icon command-edit waves-effect waves-circle\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-edit\"></span></button> " +
+                            "<button type=\"button\" class=\"btn btn-icon command-delete waves-effect waves-circle\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-delete\"></span></button>";
+                }
+            }
+
+        }).on("loaded.rs.jquery.bootgrid", function()
+        {
+            /* Executes after data is loaded and rendered */
+            grid.find(".command-edit").on("click", function(e)
+            {
+                //alert("You pressed edit on row: " + $(this).data("row-id"));
+                swal("Deleted!", "You pressed edit on "+ $(this).data("row-id") + " !", "success");
+            }).end().find(".command-delete").on("click", function(e)
+            {
+                //alert("You pressed delete on row: " + $(this).data("row-id"));
+                swal("Deleted!", "You pressed delete on "+ $(this).data("row-id") + " !", "success");
+            });
+        });
+        getUsers();
+
+        $("#refresh").click(function () {
+            getUsers();
+            console.log("refreshing");
+        })
+
+    });
+</script>
 
 
 </body>

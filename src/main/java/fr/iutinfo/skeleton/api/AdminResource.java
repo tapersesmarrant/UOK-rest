@@ -20,6 +20,8 @@ import java.util.List;
  */
 @Path("/admin")
 @RolesAllowed({"admin"})
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class AdminResource {
     final static Logger logger = LoggerFactory.getLogger(AdminResource.class);
 
@@ -31,8 +33,34 @@ public class AdminResource {
     @GET
     public Response secureForLoggedUsers(@Context SecurityContext context) {
         User currentUser = getCurrent(context);
-
         return Response.ok("{ \"id\":"+currentUser.getId() + ", \"name\":\""+currentUser.getName()+"\"}", MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/user")
+    public List<User> getALlUsers(@Context SecurityContext context) {
+        return userDao.all();
+    }
+
+    @GET
+    @Path("/user/{id}")
+    public User getAUser(@Context SecurityContext context, @PathParam("id") int id) {
+        return userDao.findById(id);
+    }
+
+
+    @GET
+    @Path("/event")
+    public List<Event> getAllEvent(@Context SecurityContext context) {
+        List<Event> ls = eventDao.all();
+
+        for (Event l : ls) {
+            l.setInvit(invitDao.findByEvent(l.getId()));
+            for (Invit i : l.getInvit()){
+                i.setUserObject(userDao.findById(i.getUser()));
+            }
+        }
+        return ls;
     }
 
     static User getCurrent(SecurityContext context){
