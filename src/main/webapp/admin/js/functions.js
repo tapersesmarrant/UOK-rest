@@ -311,11 +311,13 @@ $(document).ready(function(){
      * Weather Widget
      */
     if ($('#weather-widget')[0]) {
+        console.log("hello weather");
         $.simpleWeather({
-            location: 'Lille, FR',
+            location: "Austin, TX'",
             woeid: '',
             unit: 'f',
             success: function(weather) {
+                console.log("Got weather");
                 html = '<div class="weather-status">'+weather.temp+'&deg;'+weather.units.temp+'</div>';
                 html += '<ul class="weather-info"><li>'+weather.city+', '+weather.region+'</li>';
                 html += '<li class="currently">'+weather.currently+'</li></ul>';
@@ -329,6 +331,7 @@ $(document).ready(function(){
                 $("#weather-widget").html(html);
             },
             error: function(error) {
+                console.log("weather failded");
                 $("#weather-widget").html('<p>'+error+'</p>');
             }
         });

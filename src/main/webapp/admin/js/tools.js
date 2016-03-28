@@ -94,4 +94,4 @@ function notify(from, align, icon, type, animIn, animOut, title, message){
         '<a href="#" data-growl="url"></a>' +
         '</div>'
     });
-};
+}
