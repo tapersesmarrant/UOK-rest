@@ -1,7 +1,11 @@
 $(document).ready(function(){
     
     $("#login-button").click(function () {
-        tryLoggin($("#user").val(), $("#passwd").val())
+        if (window.location.pathname.startsWith("/admin/")){
+            tryLoggin($("#user").val(), $("#passwd").val(), "../v1/admin")
+        } else {
+            tryLoggin($("#user").val(), $("#passwd").val(), "/v1/me")
+        }
     });
     $("#passwd").on('keypress', function (event) {
         if(event.which === 13){
@@ -14,13 +18,13 @@ $(document).ready(function(){
     });
 
 });
-function tryLoggin(login,  passwd) {
+function tryLoggin(login,  passwd, url) {
     console.log(login + " : " + passwd);
     if (passwd != ""){
         $.ajax
         ({
             type: "GET",
-            url: "../v1/admin",
+            url: url,
             dataType: 'json',
             beforeSend : function(req) {
                 var header = "Basic " + btoa(login + ":" + passwd);

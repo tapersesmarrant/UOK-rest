@@ -1,155 +1,345 @@
 <!DOCTYPE html>
-<html lang="fr">
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
 <head>
-    <title>Jersey Skeleton</title>
-    <meta charset='utf-8'>
-    <!-- jQuery -->
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Material Admin</title>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <!--
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
 
-    <!-- google prettify -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <script src="js/jsonformater.js"></script>
-    <link rel="stylesheet" href="css/jsonformater.css">
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/app.min.2.css" rel="stylesheet">
 
-
-    <!-- theme bootstrap-->
-
-    <link rel="stylesheet" href="css/material-bootstrap.css">
-
-    <!-- Code local -->
-    <script src="all.js"></script>
 </head>
 <body>
+<header id="header" class="clearfix" data-current-skin="blue">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
 
+        <li class="logo hidden-xs">
+            <a href="index.html">Panel user</a>
+        </li>
 
-<nav class="navbar material_navbar material_navbar_success">
-    <div class="container-fluid">
+        <li class="pull-right">
+            <ul class="top-menu">
+                <li id="toggle-width">
+                    <div class="toggle-switch">
+                        <input id="tw-switch" type="checkbox" hidden="hidden">
+                        <label for="tw-switch" class="ts-helper"></label>
+                    </div>
+                </li>
 
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand material_navbar_brand" href="#">UOK</a>
-        </div>
+                <li id="top-search">
+                    <a href=""><i class="tm-icon zmdi zmdi-search"></i></a>
+                </li>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
-            <ul class="nav navbar-nav material_navbar_nav">
-                <li class="active"><a href="#" class="material_navbar_nav_item">Javascript <span class="sr-only">(current)</span></a></li>
-                <li><a href="#" class="material_navbar_nav_item">MVC Template (jsp)</a></li>
-                <li><a href="stats.html" class="material_navbar_nav_item">Stats</a></li>
+                <!--- | menu -->
+
+                <li class="dropdown">
+                    <a data-toggle="dropdown" href=""><i class="tm-icon zmdi zmdi-more-vert"></i></a>
+                    <ul class="dropdown-menu dm-icon pull-right">
+                        <li class="skin-switch hidden-xs">
+                            <span class="ss-skin bgm-lightblue" data-skin="lightblue"></span>
+                            <span class="ss-skin bgm-bluegray" data-skin="bluegray"></span>
+                            <span class="ss-skin bgm-cyan" data-skin="cyan"></span>
+                            <span class="ss-skin bgm-teal" data-skin="teal"></span>
+                            <span class="ss-skin bgm-orange" data-skin="orange"></span>
+                            <span class="ss-skin bgm-blue" data-skin="blue"></span>
+                        </li>
+                        <li class="divider hidden-xs"></li>
+                        <li class="hidden-xs">
+                            <a data-action="fullscreen" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                        </li>
+                        <li>
+                            <a data-action="clear-localstorage" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="zmdi zmdi-face"></i> Privacy Settings</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
+                        </li>
+                    </ul>
+                </li>
+
 
             </ul>
+        </li>
+    </ul>
 
+
+    <!-- Top Search Content -->
+    <div id="top-search-wrap">
+        <div class="tsw-inner">
+            <i id="top-search-close" class="zmdi zmdi-arrow-left"></i>
+            <input type="text">
         </div>
     </div>
-</nav>
+</header>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group ">
-
-                <label for="user">Utilisateur en mémoire : </label>
-
-                <div class="form-group materail_input_block">
-                    <input type="text" name="user" id="user" placeholder="Nom ?" class="form-control materail_input"/>
+<section id="main" data-layout="layout-1">
+    <aside id="sidebar" class="sidebar c-overflow">
+        <div class="profile-menu">
+            <a href="">
+                <div class="profile-pic">
+                    <img src="img/profile-pics/1.jpg" alt="">
                 </div>
 
-                <div class="form-group materail_input_block">
-                    <input type="text" name="user" id="alias" placeholder="Surnom ?" class="form-control materail_input"/>
-                </div>
+                <div class="profile-info">
+                    <span class="user-name-insert"></span>
 
-            </div>
-            <div class="btn-group" role="group">
-                <button id="get-ram" class="btn btn-default material_btn">Lire</button>
-                <button id="post-ram" class="btn btn-default material_btn material_btn_primary">Sauver</button>
-                <button id="list-ram" class="btn btn-default material_btn material_btn_warning">Lister</button>
-            </div>
+                    <i class="zmdi zmdi-caret-down"></i>
+                </div>
+            </a>
+
+            <ul class="main-menu">
+                <li>
+                    <a href="logout.html"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                </li>
+            </ul>
         </div>
-        <div class="col-md-6">
-            <div class="form-group ">
-                <label for="userdb">Utilisateur en base de données : </label>
-                <div class="form-group materail_input_block">
-                    <input type="text" name="userdb" id="userdb" placeholder="Nom ?" class="form-control materail_input"/>
+
+
+        <!-- main menu -->
+
+        <ul class="main-menu">
+            <li class="active">
+                <a href="index.html"><i class="zmdi zmdi-home"></i> Home</a>
+            </li>
+            <li>
+                <a href=""><i class="zmdi zmdi-account"></i> Users</a>
+            </li>
+
+            <li>
+                <a href=""><i class="zmdi zmdi-calendar-alt"></i> Evenements</a>
+            </li>
+
+        </ul>
+    </aside>
+
+    <!-- contenu -->
+
+    <section id="content">
+        <div class="container">
+            <div class="block-header">
+                <h2>Dashboard</h2>
+
+                <ul class="actions">
+                    <li>
+                        <a href="">
+                            <i class="zmdi zmdi-trending-up"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="zmdi zmdi-check-all"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown">
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="">Refresh</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Liste d'utilistateurs<small>Random text.</small></h2>
                 </div>
-                <div class="form-group materail_input_block">
-                    <input type="text" name="user" id="aliasdb" placeholder="Surnom ?" class="form-control materail_input"/>
-                </div>
-                <div class="form-group materail_input_block">
-                    <input type="password" name="user" id="passwddb" class="form-control materail_input"/>
+                <div class="card-body card-padding">
+                    <h2>Hello <span class="user-name-insert"></span> ! </h2>
                 </div>
             </div>
-            <div class="btn-group" role="group">
-                <button id="get-bdd" class="btn btn-default material_btn">Lire</button>
-                <button id="post-bdd" class="btn btn-default material_btn material_btn_primary">Sauver</button>
-                <button id="list-bdd" class="btn btn-default material_btn material_btn_warning">Lister</button>
-            </div>
+
+            <span id="content-events"></span>
+
         </div>
+    </section>
+
+</section>
+
+<!-- fin contenu-->
+
+<footer id="footer">
+    <ul class="f-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="">Contact</a></li>
+    </ul>
+</footer>
+
+<!-- Page Loader -->
+<div class="page-loader">
+    <div class="preloader pls-blue">
+        <svg class="pl-circular" viewBox="25 25 50 50">
+            <circle class="plc-path" cx="50" cy="50" r="20" />
+        </svg>
+
+        <p>Please wait...</p>
     </div>
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-md-12">
-            <label for="user">S'identifier : </label>
-            <div class="form-group materail_input_block">
-                <input type="text" name="userdb" id="userlogin" placeholder="Login" class="form-control materail_input"/>
-            </div>
-            <div class="form-group materail_input_block">
-                <input type="password" name="user" id="passwdlogin" class="form-control materail_input"/>
-            </div>
-            <br/>
-            <button id="read-forall" class="btn btn-default material_btn">Lire depuis /v1/secure/forall</button>
+</div>
 
-            <button id="read-forlogged" class="btn btn-default material_btn">Lire depuis /v1/secure/onlylogged</button>
-
-            <button id="read-byannotation" class="btn btn-default material_btn">Lire depuis /v1/secure/byannotation</button>
-
-            <button id="read-me" class="btn btn-default material_btn">Lire depuis /v1/me</button>
-
-            <button id="read-meAll" class="btn btn-default material_btn">Lire depuis /v1/me/userFull</button>
-            <button id="read-meEvents" class="btn btn-default material_btn">Lire depuis /v1/me/myEvents</button>
-            <button id="read-getInvits" class="btn btn-default material_btn">Lire depuis /v1/me/myInvints</button>
-            <button id="read-getALlUsers" class="btn btn-default material_btn">Lire depuis /v1/admin/user</button>
-            <button id="read-getALlEvent" class="btn btn-default material_btn">Lire depuis /v1/admin/event</button>
-        </div>
+<!-- Older IE warning message -->
+<!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1 class="c-white">Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="img/browsers/chrome.png" alt="">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="img/browsers/firefox.png" alt="">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="img/browsers/opera.png" alt="">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="img/browsers/safari.png" alt="">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="img/browsers/ie.png" alt="">
+                    <div>IE (New)</div>
+                </a>
+            </li>
+        </ul>
     </div>
-    <div class="row" style="margin-top: 1em;">
-        <div class="panel panel-default material_panel material_panel_primary">
-            <div class="panel-heading material_panel_heading">Réponse</div>
-            <div class="panel-body material_panel_body" id="reponse">
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#get-ram").click(function () {getUser($('#user').val(), $('#alias').val())});
-            $("#post-ram").click(function () {postUser($('#user').val(), $('#alias').val())});
-            $("#list-ram").click(function () {listUsers()});
-            $("#get-bdd").click(function () {getUserBdd($('#userdb').val(), $('#aliasdb').val())});
-            $("#post-bdd").click(function () {postUserBdd($('#userdb').val(), $('#aliasdb').val(), $('#passwddb').val())});
-            $("#list-bdd").click(function () {listUsersBdd()});
-            $("#read-forall").click(function () {getForAll()});
-            $("#read-forlogged").click(function () {getForLogged()});
-            $("#read-byannotation").click(function () {getByAnnotation()});
-            $("#read-me").click(function () {getSecure("v1/me")});
-            $("#read-meAll").click(function () {getSecure("v1/me/userFull")});
-            $("#read-meEvents").click(function () {getSecure("v1/me/myEvents")}); // myInvints
-            $("#read-getInvits").click(function () {getSecure("v1/me/myInvints")}); // myInvints
-            $("#read-getALlUsers").click(function () {getSecure("v1/admin/user")}); // myInvints
-            $("#read-getALlEvent").click(function () {getSecure("v1/admin/event")}); // myInvints
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
 
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="vendors/bower_components/flot/jquery.flot.js"></script>
+<script src="vendors/bower_components/flot/jquery.flot.resize.js"></script>
+<script src="vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
+<script src="vendors/sparklines/jquery.sparkline.min.js"></script>
+<script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+
+<script src="vendors/bower_components/moment/min/moment.min.js"></script>
+<script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js "></script>
+<script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
+<script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+<script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+<script src="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+<script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- Placeholder for IE9 -->
+<!--[if IE 9 ]>
+<script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+<![endif]-->
+
+<script src="js/flot-charts/curved-line-chart.js"></script>
+<script src="js/flot-charts/line-chart.js"></script>
+<script src="js/charts.js"></script>
+
+<script src="js/charts.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/demo.js"></script>
+<script src="js/tools.js"></script>
+
+<script>
+    var user;
+    function setUserName(name) {
+        $(".user-name-insert").each(function(i, obj) {
+            $(this).html(name);
         });
+    }
+
+    $.ajax
+    ({
+        type: "GET",
+        url: "/v1/me/userFull",
+        dataType: 'json',
+        beforeSend : function(req) {
+            req.setRequestHeader("Authorization", readCookie("auth"));
+        },
+        success: function (data){
+            user = data;
+            setUserName(data.alias);
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: "/v1/me/myEvents/full",
+        dataType: 'json',
+        beforeSend : function(req) {
+            req.setRequestHeader("Authorization", readCookie("auth"));
+        },
+        success: function (data){
+            console.log(data);
+            console.dir(data);
+            var html = "";
+            for(var i=0; i < data.length; i++){
+                html+= "<div class=\"card\">";
+                html+= "<div class=\"card-header\">";
+                html+= "<h2>" + data[i].name + "</h2>";
+                html+= "</div>";
+                html+= "<div class=\"card-body card-padding\">";
+                html+= JSON.stringify(data[i]);
+                html+= "</div></div>";
+            }
+            console.log(html);
+            $("#content-events").html(html);
+
+            /*
+             <div class="card">
+             <div class="card-header">
+             <h2>Liste d'utilistateurs<small>Random text.</small></h2>
+             </div>
+             <div class="card-body card-padding">
+             <h2>Hello <span class="user-name-insert"></span> ! </h2>
+             </div>
+             </div>
+             */
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+        }
+    });
 
 
 
-    </script>
+</script>
+
 </body>
 </html>
