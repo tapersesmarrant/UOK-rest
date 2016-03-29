@@ -67,4 +67,4 @@ hs_err_pid*
 /src/main/enunciate/out
 /src/main/enunciate/v1
 /src/main/webapp/docs
-/src/main/webapp/admin/node_modules
+/src/main/webapp/node_modules
