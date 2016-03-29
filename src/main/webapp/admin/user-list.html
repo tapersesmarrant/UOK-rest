@@ -7,15 +7,20 @@
     <title>Material Admin</title>
 
     <!-- Vendor CSS -->
-    <link href="vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
-    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
-    <link href="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
-    <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
-    <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="../vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="../vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="../vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
+    <link href="../vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="../vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="../vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link href="../vendors/bower_components/nouislider/distribute/jquery.nouislider.min.css" rel="stylesheet">
+    <link href="../vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../vendors/farbtastic/farbtastic.css" rel="stylesheet">
+    <link href="../vendors/bower_components/chosen/chosen.min.css" rel="stylesheet">
 
     <!-- CSS -->
-    <link href="css/app.min.1.css" rel="stylesheet">
-    <link href="css/app.min.2.css" rel="stylesheet">
+    <link href="../css/app.min.1.css" rel="stylesheet">
+    <link href="../css/app.min.2.css" rel="stylesheet">
 
 </head>
 <body>
@@ -160,7 +165,7 @@
         <div class="profile-menu">
             <a href="">
                 <div class="profile-pic">
-                    <img src="img/profile-pics/1.jpg" alt="">
+                    <img src="../img/profile-pics/1.jpg" alt="">
                 </div>
 
                 <div class="profile-info">
@@ -172,7 +177,7 @@
 
             <ul class="main-menu">
                 <li>
-                    <a href=""><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                    <a href="logout.html"><i class="zmdi zmdi-time-restore"></i> Logout</a>
                 </li>
             </ul>
         </div>
@@ -184,23 +189,11 @@
             <li>
                 <a href="index.html"><i class="zmdi zmdi-home"></i> Home</a>
             </li>
-            <li class="sub-menu toggled active">
-                <a href=""><i class="zmdi zmdi-account"></i> Users</a>
-
-                <ul>
-                    <li><a class="active" href="user-list.html">List</a></li>
-                    <li><a href="user-insert.html">Insersion</a></li>
-                    <li><a href="user-indiv.html">Individuel</a></li>
-                </ul>
+            <li class="active">
+                <a href="user-list.html"><i class="zmdi zmdi-account"></i> Users</a>
             </li>
-            <li class="sub-menu">
-                <a href=""><i class="zmdi zmdi-calendar-alt"></i> Evenements</a>
-
-                <ul>
-                    <li><a href="event-list.html">List</a></li>
-                    <li><a href="event-insert.html">Insersion</a></li>
-                    <li><a href="event-indiv.html">Individuel</a></li>
-                </ul>
+            <li>
+                <a href="event-list.html"><i class="zmdi zmdi-calendar-alt"></i> Evenements</a>
             </li>
 
         </ul>
@@ -226,24 +219,128 @@
                 <div class="card-header">
                     <h2>Liste d'utilistateurs<small>Random text.</small></h2>
                 </div>
+                <div class="card-body card-padding">
 
-                <table id="data-table-command" class="table table-striped table-vmiddle">
-                    <thead>
-                    <tr>
-                        <th data-column-id="id" data-type="numeric">ID</th>
-                        <th data-column-id="name">name</th>
-                        <th data-column-id="alias">alias</th>
-                        <th data-column-id="email">email</th>
-                        <th data-column-id="pro">pro</th>
-                        <th data-column-id="role">role</th>
-                        <th data-column-id="number">telephone</th>
-                        <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
-                    </tr>
-                    </thead>
-                    <tbody id="boddy-table">
 
-                    </tbody>
-                </table>
+                    <table id="data-table-command" class="table table-striped table-vmiddle">
+                        <thead>
+                        <tr>
+                            <th data-column-id="id" data-type="numeric">ID</th>
+                            <th data-column-id="name">name</th>
+                            <th data-column-id="alias">alias</th>
+                            <th data-column-id="email">email</th>
+                            <th data-column-id="pro">pro</th>
+                            <th data-column-id="role">role</th>
+                            <th data-column-id="number">telephone</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
+                        </tr>
+                        </thead>
+                        <tbody id="boddy-table">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Ajout d'utilisateur<small>Carte permetant l'ajout d'un utilisateur dans la base.</small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <br/><br/>
+
+                    <div class="row">
+
+                        <div class="col-sm-4">
+                            <div class="input-group fg-float">
+                                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control">
+                                    <label class="fg-label">Username</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="input-group fg-float">
+                                <span class="input-group-addon"><i class="zmdi zmdi-face"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control">
+                                    <label class="fg-label">Nom complet</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="input-group fg-float">
+                                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control">
+                                    <label class="fg-label">Adresse email</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="input-group fg-float">
+                                <span class="input-group-addon"><i class="zmdi zmdi-local-phone"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control">
+                                    <label class="fg-label">Téléphone</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="input-group fg-float">
+                                <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control">
+                                    <label class="fg-label">Mot de passe</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br/>
+                    <br/>
+
+                    <div class="row">
+
+                        <div class="col-sm-3 m-b-25 col-md-offset-1">
+
+                            <select class="selectpicker">
+                                <option>Utilisateur</option>
+                                <option>Admin</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3 col-md-offset-1 m-b-15 c-black">
+                            <div class="toggle-switch">
+                                <label for="ts1" class="ts-label">Pro ?</label>
+                                <input id="ts1" type="checkbox" hidden="hidden">
+                                <label for="ts1" class="ts-helper"></label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-md-offset-1">
+                            <button class="btn bgm-orange"><i class="zmdi zmdi-mail-send"></i>     Envoyer la requette </button>
+                        </div>
+
+
+                    </div>
+
+                    <br/>
+                </div>
+
+
+
             </div>
         </div>
     </section>
@@ -280,31 +377,31 @@
         <ul class="iew-download">
             <li>
                 <a href="http://www.google.com/chrome/">
-                    <img src="img/browsers/chrome.png" alt="">
+                    <img src="../img/browsers/chrome.png" alt="">
                     <div>Chrome</div>
                 </a>
             </li>
             <li>
                 <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="img/browsers/firefox.png" alt="">
+                    <img src="../img/browsers/firefox.png" alt="">
                     <div>Firefox</div>
                 </a>
             </li>
             <li>
                 <a href="http://www.opera.com">
-                    <img src="img/browsers/opera.png" alt="">
+                    <img src="../img/browsers/opera.png" alt="">
                     <div>Opera</div>
                 </a>
             </li>
             <li>
                 <a href="https://www.apple.com/safari/">
-                    <img src="img/browsers/safari.png" alt="">
+                    <img src="../img/browsers/safari.png" alt="">
                     <div>Safari</div>
                 </a>
             </li>
             <li>
                 <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="img/browsers/ie.png" alt="">
+                    <img src="../img/browsers/ie.png" alt="">
                     <div>IE (New)</div>
                 </a>
             </li>
@@ -315,28 +412,31 @@
 <![endif]-->
 
 <!-- Javascript Libraries -->
-<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
-<script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
-<script src="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
-<script src="vendors/bootgrid/jquery.bootgrid.updated.min.js"></script>
+<script src="../vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="../vendors/bower_components/Waves/dist/waves.min.js"></script>
+<script src="../vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+<script src="../vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+<script src="../vendors/bootgrid/jquery.bootgrid.updated.min.js"></script>
 
 <!-- Placeholder for IE9 -->
 <!--[if IE 9 ]>
-<script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+<script src="../vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
 <![endif]-->
 
-<script src="js/flot-charts/curved-line-chart.js"></script>
-<script src="js/flot-charts/line-chart.js"></script>
-<script src="js/charts.js"></script>
+<script src="../js/flot-charts/curved-line-chart.js"></script>
+<script src="../js/flot-charts/line-chart.js"></script>
 
-<script src="js/charts.js"></script>
-<script src="js/functions.js"></script>
-<script src="js/demo.js"></script>
-<script src="js/tools.js"></script>
+<script src="../vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="../vendors/bower_components/nouislider/distribute/jquery.nouislider.all.min.js"></script>
+<script src="../js/charts.js"></script>
+
+<script src="../js/charts.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/demo.js"></script>
+<script src="../js/tools.js"></script>
 
 
 <!-- Data Table -->
@@ -398,10 +498,39 @@
             {
                 //alert("You pressed edit on row: " + $(this).data("row-id"));
                 swal("Deleted!", "You pressed edit on "+ $(this).data("row-id") + " !", "success");
+
             }).end().find(".command-delete").on("click", function(e)
             {
                 //alert("You pressed delete on row: " + $(this).data("row-id"));
-                swal("Deleted!", "You pressed delete on "+ $(this).data("row-id") + " !", "success");
+                var id = $(this).data("row-id");
+                swal({
+                    title: "Vous êtes sur?",
+                    text: "Vous ne pourez pas récuperer votre fichier!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, le suprimer!",
+                    closeOnConfirm: false
+                }, function(){
+                    $.ajax
+                    ({
+                        type: "DELETE",
+                        url: "../v1/admin/user/" + id,
+                        dataType: 'json',
+                        beforeSend : function(req) {
+                            req.setRequestHeader("Authorization", readCookie("auth"));
+                        },
+                        success: function (data){
+                            swal("Surprimer!", "Cet utilisateur à été suprimer.", "success");
+                            getUsers();
+                        },
+                        error : function(jqXHR, textStatus, errorThrown) {
+                            swal("Surprimer!", "Cet utilisateur à été suprimer.", "success");
+                            getUsers();
+
+                        }
+                    });
+                });
             });
         });
         getUsers();

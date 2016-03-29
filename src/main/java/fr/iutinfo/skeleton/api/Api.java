@@ -6,6 +6,8 @@ import fr.iutinfo.skeleton.auth.AuthFilter;
 import org.glassfish.jersey.filter.LoggingFilter;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
+import org.glassfish.jersey.server.TracingConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 @ApplicationPath("/v1/")
@@ -16,6 +18,7 @@ public class Api extends ResourceConfig {
         //register(LoggingFilter.class);
         register(AuthFilter.class);
         register(RolesAllowedDynamicFeature.class);
+        property(ServerProperties.TRACING, TracingConfig.ON_DEMAND.name());
     }
 
 }

@@ -24,6 +24,7 @@ public class UserResource {
 
     @POST
     public Response createUser(User user) {
+        user.setRole(User.Roles.user);
         if (Strings.nullToEmpty(user.getTelNumber()).isEmpty()){
             return Response.status(Status.BAD_REQUEST).entity("field telNumer is required.").build();
         }

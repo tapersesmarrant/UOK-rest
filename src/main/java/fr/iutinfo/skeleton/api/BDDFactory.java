@@ -1,5 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
+import com.google.common.base.Strings;
 import fr.iutinfo.skeleton.res.dao.InvitDao;
 import fr.iutinfo.skeleton.res.model.Event;
 import fr.iutinfo.skeleton.res.dao.EventDao;
@@ -16,7 +17,7 @@ import java.util.Date;
 public class BDDFactory {
     private static DBI dbi = null;
 
-    private final static boolean TODROP=false;
+    private final static boolean TODROP=false   ;
 
     public static DBI getDbi() {
         if(dbi == null) {
@@ -55,6 +56,21 @@ public class BDDFactory {
                 dum.setEmail("ccc@c.fr");
                 dum.setRole(User.Roles.admin);
                 udao.insert(dum);
+                dum = new User(2,"admin2", "admin2");
+                dum.setPassword("admin2");
+                dum.setTelNumber("0681211827");
+                dum.setEmail("ccac@c.fr");
+                dum.setRole(User.Roles.admin);
+                udao.insert(dum);
+
+                for (int i = 3; i < 100; i++){
+                    String cur = Strings.repeat(""+i,4);
+                    dum = new User(0, cur, cur);
+                    dum.setPassword(cur);
+                    dum.setTelNumber(Strings.repeat(cur, 2));
+                    dum.setEmail(cur+"@dumy.fr");
+                    udao.insert(dum);
+                }
             }
             System.out.println(udao.all());
             udao.close();
