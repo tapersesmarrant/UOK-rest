@@ -77,7 +77,7 @@ public class PerosnalDBResource {
         logger.info("{}", Strings.repeat("-",30));
         logger.info("Event : {}", event.toString());
         logger.info("{}", Strings.repeat("-",30));
-        logger.info("LIst Invit : {}", event.getInvit().toString()0);
+        logger.info("LIst Invit : {}", event.getInvit().toString());
         logger.info("{}", Strings.repeat("-",30));
         event.setOwner(getCurrent(context).getId());
         int id = eventDao.insert(event);
