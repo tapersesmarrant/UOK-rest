@@ -1,5 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
+import com.google.common.base.Strings;
 import fr.iutinfo.skeleton.res.dao.EventDao;
 import fr.iutinfo.skeleton.res.dao.InvitDao;
 import fr.iutinfo.skeleton.res.dao.UserDao;
@@ -73,7 +74,11 @@ public class PerosnalDBResource {
     @POST
     @Path("/event")
     public Response postEvent(@Context SecurityContext context, Event event){
-        System.out.println(event);
+        logger.info("{}", Strings.repeat("-",30));
+        logger.info("Event : {}", event.toString());
+        logger.info("{}", Strings.repeat("-",30));
+        logger.info("LIst Invit : {}", event.getInvit().toString()0);
+        logger.info("{}", Strings.repeat("-",30));
         event.setOwner(getCurrent(context).getId());
         int id = eventDao.insert(event);
         for (Invit invit : event.getInvit()){

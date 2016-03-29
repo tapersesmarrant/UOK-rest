@@ -158,9 +158,9 @@ public class Event {
         this.desciption = desciption;
     }
 
+
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
@@ -171,6 +171,7 @@ public class Event {
                 isTime == event.isTime &&
                 timeBeforeRush == event.timeBeforeRush &&
                 cost == event.cost &&
+                nmbPlaces == event.nmbPlaces &&
                 isDone == event.isDone &&
                 isCanceled == event.isCanceled &&
                 Objects.equal(location, event.location) &&
@@ -182,7 +183,7 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, owner, location, date, name, limiteTime, isLock, isRush, isTime, timeBeforeRush, cost, isDone, isCanceled, desciption);
+        return Objects.hashCode(id, owner, location, date, name, limiteTime, isLock, isRush, isTime, timeBeforeRush, cost, nmbPlaces, isDone, isCanceled, desciption);
     }
 
     @Override
@@ -199,9 +200,11 @@ public class Event {
                 .add("isTime", isTime)
                 .add("timeBeforeRush", timeBeforeRush)
                 .add("cost", cost)
+                .add("nmbPlaces", nmbPlaces)
                 .add("isDone", isDone)
                 .add("isCanceled", isCanceled)
                 .add("desciption", desciption)
+                .add("invit", invit)
                 .toString();
     }
 

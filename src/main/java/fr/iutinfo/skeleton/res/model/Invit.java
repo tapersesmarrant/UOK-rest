@@ -69,6 +69,7 @@ public class Invit {
         isFired = fired;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,12 +79,14 @@ public class Invit {
                 user == invit.user &&
                 isSecondaryList == invit.isSecondaryList &&
                 isFired == invit.isFired &&
-                Objects.equal(timestamp, invit.timestamp);
+                isOk == invit.isOk &&
+                Objects.equal(timestamp, invit.timestamp) &&
+                Objects.equal(nameEvent, invit.nameEvent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(event, user, timestamp, isSecondaryList, isFired);
+        return Objects.hashCode(event, user, timestamp, isSecondaryList, isFired, isOk, nameEvent);
     }
 
     @Override
@@ -94,6 +97,9 @@ public class Invit {
                 .add("timestamp", timestamp)
                 .add("isSecondaryList", isSecondaryList)
                 .add("isFired", isFired)
+                .add("isOk", isOk)
+                .add("nameEvent", nameEvent)
+                .add("userObject", userObject)
                 .toString();
     }
 
