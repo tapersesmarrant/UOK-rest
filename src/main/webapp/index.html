@@ -252,6 +252,7 @@
 <script src="vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
 <script src="vendors/sparklines/jquery.sparkline.min.js"></script>
 <script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+<script src="vendors/bootgrid/jquery.bootgrid.updated.min.js"></script>
 
 <script src="vendors/bower_components/moment/min/moment.min.js"></script>
 <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js "></script>
@@ -319,10 +320,46 @@
                     html+= "</div>";
                     html+= "<div class=\"card-body card-padding\">";
                     html+= JSON.stringify(data[i]);
+
+                    html += "<table id=\"data-table-primary-"+i+"\" class=\"table table-striped table-vmiddle\">";
+                    html += "<thead>";
+                    html += "<tr>";
+                    html += "<th data-column-id=\"number\" data-type=\"numeric\">telephone</th>";
+                    html += "<th data-column-id=\"name\">name</th>";
+                    html += "<th data-column-id=\"email\">email</th>";
+                    html += "<th data-column-id=\"status\">status</th>";
+                    html += "</tr>";
+                    html += "</thead>";
+                    html += "<tbody id=\"boddy-table\">";
+                    html += "</tbody>";
+                    html += "</table>";
+
                     html+= "</div></div>";
-                }
+                }//data-table-command
                 console.log(html);
                 $("#content-events").html(html);
+                for (var i=0; i<data.length; i++){
+                    $("#data-table-primary-"+i).bootgrid({
+                        css: {
+                            icon: 'zmdi icon',
+                            iconColumns: 'zmdi-view-module',
+                            iconDown: 'zmdi-expand-more',
+                            iconRefresh: 'zmdi-refresh',
+                            iconUp: 'zmdi-expand-less'
+                        }
+                    });
+                    for(var i2=0;i2<data[i].invit.length; i2++){
+                        $("#data-table-primary-"+i).bootgrid("append", [{
+                            number : data[i].invit[i2].userObject.telNumber,
+                            name: data[i].invit[i2].userObject.name,
+                            email: data[i].invit[i2].userObject.email,
+                            status: data[i].invit[i2].isOK
+                        }]);
+                    }
+
+                }
+
+
 
                 /*
                  <div class="card">
