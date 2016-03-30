@@ -119,10 +119,10 @@ public class PerosnalDBResource {
                     SecureRandom sr = new SecureRandom();
                     User u = new User();
                     invit.setUserObject(u);
-
-                    u.setTelNumber(""+ sr.nextInt(100000000));
-                    u.setEmail("En attente de reponce");
-                    u.setName("En attente de reponce");
+                    String str = ""+sr.nextInt(100000000);
+                    u.setTelNumber(""+ str);
+                    u.setEmail("En attente de reponce pour " + str);
+                    u.setName("En attente de reponce pour" + str);
 
                     invit.setUser(userDao.insert(u));
                     invitDao.insert(invit);
