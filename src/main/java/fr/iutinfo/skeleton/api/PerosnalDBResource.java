@@ -121,13 +121,13 @@ public class PerosnalDBResource {
                     invit.setUserObject(u);
 
                     u.setTelNumber(""+ sr.nextInt(100000000));
+                    u.setEmail("En attente de réponce");
+                    u.setName("En attente de réponce");
 
                     invit.setUser(userDao.insert(u));
                     invitDao.insert(invit);
                 }
-
-
-
+                
 
 
             } else {
