@@ -119,7 +119,7 @@ public class PerosnalDBResource {
 
                 invit.setUser(userDao.insert(u));
                 invitDao.insert(invit);
-                
+
             } else {
                 User telUser = userDao.findByNumber(user.getTelNumber());
                 if (telUser != null){
@@ -143,7 +143,7 @@ public class PerosnalDBResource {
     public Event getEvent(@Context SecurityContext context, @PathParam("id") int id){
         User user = getCurrent(context);
         Event event = eventDao.findById(id);
-        boolean haveToFilter = event.getOwner() != user.getId();
+        boolean haveToFilter = false;
         event.setInvit(invitDao.findByEvent(event.getId()));
         boolean hasFoundUser = false;
 
