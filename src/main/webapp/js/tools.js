@@ -26,7 +26,26 @@ $(document).ready(function(){
             }
         }
     } else {
-        // TODO user normal
+        if (window.location.pathname != "/login.html"){
+            if (readCookie("auth") == ""){
+                document.location.href = "login.html";
+            } else {
+                $.ajax
+                ({
+                    type: "GET",
+                    url: "../v1/me",
+                    dataType: 'json',
+                    beforeSend : function(req) {
+                        req.setRequestHeader("Authorization", readCookie("auth"));
+                    },
+                    success: function (data){
+                    },
+                    error : function(jqXHR, textStatus, errorThrown) {
+                        document.location.href = "login.html";
+                    }
+                });
+            }
+        }
     }
 
 
