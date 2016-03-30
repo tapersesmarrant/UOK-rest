@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
 import javax.jws.soap.SOAPBinding;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -108,15 +110,27 @@ public class PerosnalDBResource {
             invit.setEvent(id);
 
             User user = invit.getUserObject();
-            User telUser = userDao.findByNumber(user.getTelNumber());
-            if (telUser != null){
-                invit.setUser(telUser.getId());
+            if (user == null){
+
+                User u = new User();
+                invit.setUserObject(u);
+
+                u.setTelNumber(""+ new SecureRandom().nextInt(100000000));
+
+                invit.setUser(userDao.insert(u));
                 invitDao.insert(invit);
+                
             } else {
-                User newUser = new User();
-                newUser.setTelNumber(user.getTelNumber());
-                invit.setUser(userDao.insert(newUser));
-                invitDao.insert(invit);
+                User telUser = userDao.findByNumber(user.getTelNumber());
+                if (telUser != null){
+                    invit.setUser(telUser.getId());
+                    invitDao.insert(invit);
+                } else {
+                    User newUser = new User();
+                    newUser.setTelNumber(user.getTelNumber());
+                    invit.setUser(userDao.insert(newUser));
+                    invitDao.insert(invit);
+                }
             }
 
 
