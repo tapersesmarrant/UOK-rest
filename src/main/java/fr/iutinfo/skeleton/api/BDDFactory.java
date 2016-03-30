@@ -93,14 +93,18 @@ public class BDDFactory {
 
             invitDao.createUserTable();
             if (invitDao.all().isEmpty()){
-                System.out.println("found empty !");
-                Invit invit = new Invit(1,2,new Date(),false,false);
+                System.out.println("found Invit empty empty !");
+                Invit invit = new Invit(1,3,new Date(),false,false);
+                System.out.println("Inserting invit 2");
                 invitDao.insert(invit);
-                invit.setUser(3);
-                invitDao.insert(invit);
+                System.out.println("INserting invit 3");
                 invit.setUser(4);
                 invitDao.insert(invit);
+                System.out.println("INserting invit 4");
                 invit.setUser(5);
+                invitDao.insert(invit);
+                System.out.println("INserting invit 5");
+                invit.setUser(6);
                 invitDao.insert(invit);
                 System.out.println("Inserted !");
             }
