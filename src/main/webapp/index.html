@@ -283,58 +283,62 @@
         });
     }
 
-    $.ajax
-    ({
-        type: "GET",
-        url: "/v1/me/userFull",
-        dataType: 'json',
-        beforeSend : function(req) {
-            req.setRequestHeader("Authorization", readCookie("auth"));
-        },
-        success: function (data){
-            user = data;
-            setUserName(data.alias);
-        },
-        error : function(jqXHR, textStatus, errorThrown) {
-        }
-    });
+    $(document).ready(function(){
 
-    $.ajax({
-        type: "GET",
-        url: "/v1/me/myEvents/full",
-        dataType: 'json',
-        beforeSend : function(req) {
-            req.setRequestHeader("Authorization", readCookie("auth"));
-        },
-        success: function (data){
-            console.log(data);
-            console.dir(data);
-            var html = "";
-            for(var i=0; i < data.length; i++){
-                html+= "<div class=\"card\">";
-                html+= "<div class=\"card-header\">";
-                html+= "<h2>" + data[i].name + "</h2>";
-                html+= "</div>";
-                html+= "<div class=\"card-body card-padding\">";
-                html+= JSON.stringify(data[i]);
-                html+= "</div></div>";
+        $.ajax
+        ({
+            type: "GET",
+            url: "/v1/me/userFull",
+            dataType: 'json',
+            beforeSend : function(req) {
+                req.setRequestHeader("Authorization", readCookie("auth"));
+            },
+            success: function (data){
+                user = data;
+                setUserName(data.alias);
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
             }
-            console.log(html);
-            $("#content-events").html(html);
+        });
 
-            /*
-             <div class="card">
-             <div class="card-header">
-             <h2>Liste d'utilistateurs<small>Random text.</small></h2>
-             </div>
-             <div class="card-body card-padding">
-             <h2>Hello <span class="user-name-insert"></span> ! </h2>
-             </div>
-             </div>
-             */
-        },
-        error : function(jqXHR, textStatus, errorThrown) {
-        }
+        $.ajax({
+            type: "GET",
+            url: "/v1/me/myEvents/full",
+            dataType: 'json',
+            beforeSend : function(req) {
+                req.setRequestHeader("Authorization", readCookie("auth"));
+            },
+            success: function (data){
+                console.log(data);
+                console.dir(data);
+                var html = "";
+                for(var i=0; i < data.length; i++){
+                    html+= "<div class=\"card\">";
+                    html+= "<div class=\"card-header\">";
+                    html+= "<h2>" + data[i].name + "</h2>";
+                    html+= "</div>";
+                    html+= "<div class=\"card-body card-padding\">";
+                    html+= JSON.stringify(data[i]);
+                    html+= "</div></div>";
+                }
+                console.log(html);
+                $("#content-events").html(html);
+
+                /*
+                 <div class="card">
+                 <div class="card-header">
+                 <h2>Liste d'utilistateurs<small>Random text.</small></h2>
+                 </div>
+                 <div class="card-body card-padding">
+                 <h2>Hello <span class="user-name-insert"></span> ! </h2>
+                 </div>
+                 </div>
+                 */
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            }
+        });
+
     });
 
 

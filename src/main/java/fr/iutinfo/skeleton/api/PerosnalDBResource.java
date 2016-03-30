@@ -52,6 +52,29 @@ public class PerosnalDBResource {
     }
 
     @GET
+    @Path("/myEvents/full")
+    public List<Event> getAllUserEventFull(@Context SecurityContext context){
+        User user = getCurrent(context);
+        List<Event> alls =eventDao.all(user.getId());
+        for (Event event : alls) {
+            boolean haveToFilter = event.getOwner() != user.getId();
+            event.setInvit(invitDao.findByEvent(event.getId()));
+
+            for (Invit invit :  event.getInvit()){
+                if (user.getId() == invit.getUser()){
+                    invit.setUserObject(user);
+                } else if (haveToFilter){
+                    invit.setUserObject(userDao.findById(invit.getUser()).minAnonymise());
+                } else {
+                    invit.setUserObject(userDao.findById(invit.getUser()).anonymise());
+                }
+            }
+        }
+
+        return alls;
+    }
+
+    @GET
     @Path("/myInvints")
     public List<Invit> getAllInvits(@Context SecurityContext context){
         List<Invit> list = invitDao.findByOwner(getCurrent(context).getId());
@@ -114,7 +137,7 @@ public class PerosnalDBResource {
             if (!hasFoundUser){
                 hasFoundUser = user.getId() == invit.getUser();
                 invit.setFired(true);
-                invitDao.insert(invit);
+                //invitDao.insert(invit);
             }
             if (user.getId() == invit.getUser()){
                 hasFoundUser = true;
@@ -123,7 +146,6 @@ public class PerosnalDBResource {
             } else {
                 invit.setUserObject(userDao.findById(invit.getUser()).anonymise());
             }
-
         }
 
         if (!hasFoundUser && !haveToFilter){

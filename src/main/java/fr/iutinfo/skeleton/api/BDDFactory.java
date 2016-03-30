@@ -17,7 +17,7 @@ import java.util.Date;
 public class BDDFactory {
     private static DBI dbi = null;
 
-    private final static boolean TODROP=false   ;
+    private final static boolean TODROP=true;
 
     public static DBI getDbi() {
         if(dbi == null) {
@@ -95,6 +95,12 @@ public class BDDFactory {
             if (invitDao.all().isEmpty()){
                 System.out.println("found empty !");
                 Invit invit = new Invit(1,2,new Date(),false,false);
+                invitDao.insert(invit);
+                invit.setUser(3);
+                invitDao.insert(invit);
+                invit.setUser(4);
+                invitDao.insert(invit);
+                invit.setUser(5);
                 invitDao.insert(invit);
                 System.out.println("Inserted !");
             }
