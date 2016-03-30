@@ -14,6 +14,7 @@ import javax.jws.soap.SOAPBinding;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.security.SecureRandom;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -105,20 +106,29 @@ public class PerosnalDBResource {
         logger.info("LIst Invit : {}", event.getInvit().toString());
         logger.info("{}", Strings.repeat("-",30));
         event.setOwner(getCurrent(context).getId());
+        if (event.getDate() == null){
+            event.setDate(new Date());
+        }
         int id = eventDao.insert(event);
         for (Invit invit : event.getInvit()){
             invit.setEvent(id);
 
             User user = invit.getUserObject();
             if (user == null){
+                for (int i = 0; i < 5; i++){
+                    SecureRandom sr = new SecureRandom();
+                    User u = new User();
+                    invit.setUserObject(u);
 
-                User u = new User();
-                invit.setUserObject(u);
+                    u.setTelNumber(""+ sr.nextInt(100000000));
 
-                u.setTelNumber(""+ new SecureRandom().nextInt(100000000));
+                    invit.setUser(userDao.insert(u));
+                    invitDao.insert(invit);
+                }
 
-                invit.setUser(userDao.insert(u));
-                invitDao.insert(invit);
+
+
+
 
             } else {
                 User telUser = userDao.findByNumber(user.getTelNumber());
