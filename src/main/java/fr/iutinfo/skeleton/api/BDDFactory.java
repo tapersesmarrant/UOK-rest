@@ -84,7 +84,7 @@ public class BDDFactory {
                 dum.setLocation("IUT A Lille 1");
                 dum.setTime(true);
                 dum.setDate(new Date());
-                dum.setName("Salon de démo de l'aplication");
+                dum.setName("Démo de l'aplication");
                 dum.setLimiteTime(new Date());
                 dum.setCost(0);
                 edao.insert(dum);

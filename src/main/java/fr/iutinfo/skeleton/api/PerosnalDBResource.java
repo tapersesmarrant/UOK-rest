@@ -127,7 +127,7 @@ public class PerosnalDBResource {
                     invit.setUser(userDao.insert(u));
                     invitDao.insert(invit);
                 }
-                
+
 
 
             } else {
