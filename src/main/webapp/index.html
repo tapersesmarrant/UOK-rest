@@ -284,6 +284,17 @@
         });
     }
 
+    function getStatus(isOk, isFired) {
+        console.log("ok : " + isOk + ", isFired : " + isFired);
+        if (isOk){
+            return "<button class=\"btn btn-success btn-icon waves-circle\"><i class=\"zmdi zmdi-check\"></i></button>";
+        } else if (isFired){
+            return "<button class=\"btn btn-danger btn-icon waves-circle\"><i class=\"zmdi zmdi-close-circle\"></i></button>" ;
+        } else {
+            return "<button class=\"btn bgm-cyan btn-icon waves-circle\"><i class=\"zmdi zmdi-mail-send\"></i></button>";
+        }
+    }
+
     function refreshData(){
         $.ajax
         ({
@@ -368,7 +379,7 @@
                             number : data[i].invit[i2].userObject.telNumber,
                             name: data[i].invit[i2].userObject.name,
                             email: data[i].invit[i2].userObject.email,
-                            status: data[i].invit[i2].isOK
+                            status: getStatus(data[i].invit[i2].ok, data[i].invit[i2].fired)
                         }]);
                     }
 

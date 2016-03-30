@@ -12,6 +12,7 @@ import org.h2.jdbcx.JdbcDataSource;
 
 import javax.inject.Singleton;
 import java.util.Date;
+import java.util.List;
 
 @Singleton
 public class BDDFactory {
@@ -73,6 +74,7 @@ public class BDDFactory {
                 }
             }
             System.out.println(udao.all());
+            List<User> allUsers = udao.all();
             udao.close();
             //*
             edao.createEventTable();
@@ -94,22 +96,32 @@ public class BDDFactory {
             invitDao.createUserTable();
             if (invitDao.all().isEmpty()){
                 System.out.println("found Invit empty empty !");
-                Invit invit = new Invit(1,3,new Date(),false,false);
+                Invit invit = new Invit(1,allUsers.get(1).getId(),new Date(),false,false);
                 System.out.println("Inserting invit 2");
+                invit.setOk(true);
+                invit.setFired(true);
                 invitDao.insert(invit);
+                System.out.println(invit);
                 System.out.println("INserting invit 3");
-                invit.setUser(4);
+                invit.setOk(false);
+                invit.setFired(true);
+                invit.setUser(allUsers.get(2).getId());
                 invitDao.insert(invit);
+                System.out.println(invit);
                 System.out.println("INserting invit 4");
-                invit.setUser(5);
+                System.out.println(invit);
+                invit.setFired(false);
+                invit.setUser(allUsers.get(3).getId());
                 invitDao.insert(invit);
                 System.out.println("INserting invit 5");
-                invit.setUser(6);
+                invit.setUser(allUsers.get(4).getId());
                 invitDao.insert(invit);
+                System.out.println(invit);
                 System.out.println("Inserted !");
             }
             System.out.println(invitDao.all());
             invitDao.close();
+            System.out.println("DB INIT END");
             //*/
         }
         return dbi;

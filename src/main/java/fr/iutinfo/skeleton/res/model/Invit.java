@@ -69,6 +69,10 @@ public class Invit {
         isFired = fired;
     }
 
+    public void setIsFired(boolean fired) {
+        isFired = fired;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -124,6 +128,9 @@ public class Invit {
     }
 
     public void setOk(boolean ok) {
+        isOk = ok;
+    }
+    public void setIsOk(boolean ok) {
         isOk = ok;
     }
 }

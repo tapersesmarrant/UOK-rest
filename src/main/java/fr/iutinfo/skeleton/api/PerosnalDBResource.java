@@ -148,12 +148,6 @@ public class PerosnalDBResource {
             }
         }
 
-        if (!hasFoundUser && !haveToFilter){
-            throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Vous n'êtes pas dans l'evenemnt").build());
-        }
-
-
         return event;
     }
 
