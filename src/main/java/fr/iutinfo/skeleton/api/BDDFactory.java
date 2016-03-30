@@ -81,10 +81,10 @@ public class BDDFactory {
             if (edao.all().isEmpty()){
                 Event dum = new Event();
                 dum.setOwner(1);
-                dum.setLocation("in your mom home");
+                dum.setLocation("IUT A Lille 1");
                 dum.setTime(true);
                 dum.setDate(new Date());
-                dum.setName("Finaly, a freaking event...");
+                dum.setName("Salon de démo de l'aplication");
                 dum.setLimiteTime(new Date());
                 dum.setCost(0);
                 edao.insert(dum);
