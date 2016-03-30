@@ -121,8 +121,8 @@ public class PerosnalDBResource {
                     invit.setUserObject(u);
                     String str = ""+sr.nextInt(100000000);
                     u.setTelNumber(""+ str);
-                    u.setEmail("En attente de reponce pour " + str);
-                    u.setName("En attente de reponce pour" + str);
+                    u.setEmail("En attente de reponse pour " + str);
+                    u.setName("En attente de reponse pour " + str);
 
                     invit.setUser(userDao.insert(u));
                     invitDao.insert(invit);
