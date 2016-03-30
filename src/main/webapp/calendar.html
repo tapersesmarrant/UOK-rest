@@ -12,6 +12,7 @@
     <link href="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
     <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
     <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
 
     <!-- CSS -->
     <link href="css/app.min.1.css" rel="stylesheet">
@@ -116,10 +117,10 @@
         <!-- main menu -->
 
         <ul class="main-menu">
-            <li class="active">
+            <li >
                 <a href="index.html"><i class="zmdi zmdi-home"></i> Home</a>
             </li>
-            <li>
+            <li class="active">
                 <a href="calendar.html"><i class="zmdi zmdi-calendar-alt"></i> Calendrier</a>
             </li>
             <!--
@@ -133,46 +134,64 @@
     <!-- contenu -->
 
     <section id="content">
-        <div class="container">
+        <div class="container c-alt">
+
             <div class="block-header">
-                <h2>Dashboard</h2>
+                <h2>Calendar <small>Work in progress...</small></h2>
 
-                <ul class="actions">
-                    <li>
-                        <a href="">
-                            <i class="zmdi zmdi-trending-up"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="zmdi zmdi-check-all"></i>
-                        </a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="" data-toggle="dropdown">
-                            <i class="zmdi zmdi-more-vert"></i>
-                        </a>
 
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a href="">Refresh</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
 
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h2>Liste d'utilistateurs<small>Random text.</small></h2>
-                </div>
-                <div class="card-body card-padding">
-                    <h2>Hello <span class="user-name-insert"></span> ! </h2>
+            <div id="calendar"></div>
+
+            <!-- Add event -->
+            <div class="modal fade" id="addNew-event" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add an Event</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="addEvent" role="form">
+                                <div class="form-group">
+                                    <label for="eventName">Event Name</label>
+                                    <div class="fg-line">
+                                        <input type="text" class="input-sm form-control" id="eventName" placeholder="eg: Sports day">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="eventName">Tag Color</label>
+                                    <div class="event-tag">
+                                        <span data-tag="bgm-teal" class="bgm-teal selected"></span>
+                                        <span data-tag="bgm-red" class="bgm-red"></span>
+                                        <span data-tag="bgm-pink" class="bgm-pink"></span>
+                                        <span data-tag="bgm-blue" class="bgm-blue"></span>
+                                        <span data-tag="bgm-lime" class="bgm-lime"></span>
+                                        <span data-tag="bgm-green" class="bgm-green"></span>
+                                        <span data-tag="bgm-cyan" class="bgm-cyan"></span>
+                                        <span data-tag="bgm-orange" class="bgm-orange"></span>
+                                        <span data-tag="bgm-purple" class="bgm-purple"></span>
+                                        <span data-tag="bgm-gray" class="bgm-gray"></span>
+                                        <span data-tag="bgm-black" class="bgm-black"></span>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="getStart" />
+                                <input type="hidden" id="getEnd" />
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-link" id="addEvent">Add Event</button>
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <span id="content-events"></span>
+
 
         </div>
     </section>
@@ -261,6 +280,7 @@
 <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
 <script src="vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
 <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 
 <!-- Placeholder for IE9 -->
 <!--[if IE 9 ]>
@@ -398,6 +418,138 @@
 
 
 
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        var cId = $('#calendar'); //Change the name if you want. I'm also using thsi add button for more actions
+
+        //Generate the Calendar
+        cId.fullCalendar({
+            header: {
+                right: '',
+                center: 'prev, title, next',
+                left: ''
+            },
+
+            theme: true, //Do not remove this as it ruin the design
+            selectable: true,
+            selectHelper: true,
+            editable: true,
+
+            //Add Events
+            events: [
+            ],
+
+            //On Day Select
+            select: function(start, end, allDay) {
+                $('#addNew-event').modal('show');
+                $('#addNew-event input:text').val('');
+                $('#getStart').val(start);
+                $('#getEnd').val(end);
+            }
+        });
+
+        //Create and ddd Action button with dropdown in Calendar header.
+        var actionMenu = '<ul class="actions actions-alt" id="fc-actions">' +
+                '<li class="dropdown">' +
+                '<a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>' +
+                '<ul class="dropdown-menu dropdown-menu-right">' +
+                '<li class="active">' +
+                '<a data-view="month" href="">Month View</a>' +
+                '</li>' +
+                '<li>' +
+                '<a data-view="basicWeek" href="">Week View</a>' +
+                '</li>' +
+                '<li>' +
+                '<a data-view="agendaWeek" href="">Agenda Week View</a>' +
+                '</li>' +
+                '<li>' +
+                '<a data-view="basicDay" href="">Day View</a>' +
+                '</li>' +
+                '<li>' +
+                '<a data-view="agendaDay" href="">Agenda Day View</a>' +
+                '</li>' +
+                '</ul>' +
+                '</div>' +
+                '</li>';
+
+
+        cId.find('.fc-toolbar').append(actionMenu);
+
+        //Event Tag Selector
+        (function(){
+            $('body').on('click', '.event-tag > span', function(){
+                $('.event-tag > span').removeClass('selected');
+                $(this).addClass('selected');
+            });
+        })();
+
+        //Add new Event
+        $('body').on('click', '#addEvent', function(){
+            var eventName = $('#eventName').val();
+            var tagColor = $('.event-tag > span.selected').attr('data-tag');
+
+            if (eventName != '') {
+                //Render Event
+                $('#calendar').fullCalendar('renderEvent',{
+                    title: eventName,
+                    start: $('#getStart').val(),
+                    end:  $('#getEnd').val(),
+                    allDay: true,
+                    className: tagColor
+
+                },true ); //Stick the event
+
+                $('#addNew-event form')[0].reset()
+                $('#addNew-event').modal('hide');
+            }
+
+            else {
+                $('#eventName').closest('.form-group').addClass('has-error');
+            }
+        });
+
+        //Calendar views
+        $('body').on('click', '#fc-actions [data-view]', function(e){
+            e.preventDefault();
+            var dataView = $(this).attr('data-view');
+
+            $('#fc-actions li').removeClass('active');
+            $(this).parent().addClass('active');
+            cId.fullCalendar('changeView', dataView);
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/v1/me/myEvents/full",
+            dataType: 'json',
+            beforeSend : function(req) {
+                req.setRequestHeader("Authorization", readCookie("auth"));
+            },
+            success: function (data){
+                console.log(data);
+                console.dir(data);
+                for(var i=0; i < data.length; i++){
+                    $('#calendar').fullCalendar('renderEvent',{
+                        title: data[i].name,
+                        start: new Date(data[i].date),
+                        allDay: true,
+                        className: 'bgm-orange'
+
+                    },true );
+                }
+
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            }
+        });
+
+    });
 </script>
 
 </body>
